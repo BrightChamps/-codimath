@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Turtle Game Replica</title>
+  <link rel="stylesheet" href="bootstrap.css">
+  <script src="blockly_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
+  <script src="../blocks_compressed.js"></script>
+  <script src="msg/js/en.js"></script>
+  <script src="block/Start_Point.js"></script>
+  <script src="block/make_line.js"></script>
+  <script src="block/stop.js"></script>
+  <script src="generator/Start_Point.js"></script>
+  <script src="generator/make_line.js"></script>
+  <script src="generator/stop.js"></script>
+
+
+  <style>
+    body{
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1{
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+
+
+  <body mode ="maker">
+    <header class="mdl-color--cyan-500">
+      <div style="display: inline;">
+        <img src="logo.png">
+        <h1 style="display: inline;position: absolute; right: 50px; font-size: 35px;">Explore Coordinate Geometry</h1>
+      </div>
+      <h2 class="mode-maker">Draw a Square of side 200 units and 1 point on (100,100) (Refresh to Clear) </h2>
+
+    <p>
+      <button onclick ="runCode()" class="btn btn-primary">Draw</button>
+    </p>
+
+    <div id ="blocklyDiv" style="position: absolute; left: 0px; height: 480px; width: 700px;"></div>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <category name="Choose Blocks">
+        <block type="StartPoint"></block>
+        <block type="make_line"></block>
+        <block type="stop_draw"></block>
+      </category>
+    </xml>
+
+    <div id = "container" style="position: absolute; right: 10px; height: 500px; width: 500px; background-image: url('practice-coordinates.jpeg');">
+      <canvas id="mycanvas" width="500" height="500"></canvas>
+    </div>
+
+
+   
+
+    <script>
+
+      var workspace = Blockly.inject('blocklyDiv',
+      {media: '../../media/',
+      toolbox: document.getElementById('toolbox')});
+
+
+      var canvas = document.getElementById("mycanvas");
+      var ctx = canvas.getContext("2d");
+
+      function runCode(){
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try{
+          eval(code);
+        } catch(e){
+          alert(e);
+        }
+        console.log(code);
+      }
+
+      function clearCanvas(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    </script>
+
+
+  </body>
+  </html>

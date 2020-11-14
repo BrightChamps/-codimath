@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rectangle Demo </title>
+  <link rel="stylesheet" href="bootstrap.css">
+  <style>
+    #containe {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      background: yellow;
+      border: purple;
+      border-width: 1px;
+      display: none;
+    }
+    #animate {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    #animate2 {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      display: none;
+    }
+
+    .modall {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 10000000; /* Sit on top */
+      padding-top: 150px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 700px; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 350px;
+}
+
+    </style>
+    <script>
+      var glen=0,gbre=0,gc;
+    </script>
+    <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
+    <script>
+      function myMove() {
+        var elem = document.getElementById("animate");  
+        var elem2 = document.getElementById("animate2"); 
+        var pos = 0;
+        var x = 0;
+        var y = 0;
+        var inx,iny;
+        if(glen>gbre){
+          inx=1;
+          iny = glen/gbre;
+        }
+        else{
+          iny=1;
+          inx=gbre/glen;
+        }
+        var id = setInterval(frame, 5);
+        function frame() {
+          if (x+50 >= gbre && y+50>=glen) {
+            clearInterval(id);
+            elem.style.display = "none";
+            elem2.style.display = "none";
+            document.getElementById("containe").style.display = "none";
+            var t1 = document.getElementById("t1");
+            var t2 = document.getElementById("t2");
+            var point_a1 = ((500-glen)/2)+","+((500-gbre)/2)+" ";
+            var point_b1 = ((500+glen)/2)+","+((500-gbre)/2)+" ";
+            var point_c1 = ((500+glen)/2)+","+((500+gbre)/2);
+            var point_a2 = ((500+glen)/2)+","+(((500+gbre)/2)+7)+" ";
+            var point_b2 = ((500-glen)/2)+","+(((500+gbre)/2)+7)+" ";
+            var point_c2 = ((500-glen)/2)+","+(((500-gbre)/2)+7);
+            t1.setAttribute("points",point_a1+point_b1+point_c1);
+            t2.setAttribute("points",point_a2+point_b2+point_c2);
+            document.getElementById("modall").style.display = "block";
+          } else {
+            pos++;
+            x = x + inx;
+            y = y + iny;
+            if(pos%50<25){
+            elem.style.top = y + "px"; 
+            elem.style.left = x + "px";
+            elem.style.display = "block";
+            elem2.style.display = "none";
+            }
+            else{
+              elem2.style.top = y + "px"; 
+            elem2.style.left = x + "px";
+            elem2.style.display = "block";
+            elem.style.display = "none";
+            } 
+          }
+        }
+      }
+      function myMove2() {
+        var elem = document.getElementById("animate");  
+        var elem2 = document.getElementById("animate2"); 
+        elem.src = "3.png";
+        elem2.src = "4.png";
+        var pos = 0;
+        var x = 0;
+        var y = glen-50;
+        var inx,iny;
+        if(glen>gbre){
+          inx=1;
+          iny = glen/gbre;
+        }
+        else{
+          iny=1;
+          inx=gbre/glen;
+        }
+        var id = setInterval(frame, 5);
+        function frame() {
+          if (x+50 >= gbre || y<=0) {
+            clearInterval(id);
+            elem.style.display = "none";
+            elem2.style.display = "none";
+            document.getElementById("containe").style.display = "none";
+            var t1 = document.getElementById("t1");
+            var t2 = document.getElementById("t2");
+            var point_a1 = ((500-glen)/2)+","+((500-gbre)/2)+" ";
+            var point_b1 = ((500+glen)/2)+","+((500-gbre)/2)+" ";
+            var point_c1 = ((500-glen)/2)+","+((500+gbre)/2);
+            var point_a2 = ((500+glen)/2)+","+(((500+gbre)/2)+7)+" ";
+            var point_b2 = ((500-glen)/2)+","+(((500+gbre)/2)+7)+" ";
+            var point_c2 = ((500+glen)/2)+","+(((500-gbre)/2)+7);
+            t1.setAttribute("points",point_a1+point_b1+point_c1);
+            t2.setAttribute("points",point_a2+point_b2+point_c2);
+          } else {
+            pos++;
+            x = x + inx;
+            y = y - iny;
+            if(pos%50<25){
+            elem.style.top = y + "px"; 
+            elem.style.left = x + "px";
+            elem.style.display = "block";
+            elem2.style.display = "none";
+            }
+            else{
+              elem2.style.top = y + "px"; 
+            elem2.style.left = x + "px";
+            elem2.style.display = "block";
+            elem.style.display = "none";
+            } 
+          }
+        }
+      }
+      </script>
+
+  <script src="blockly_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
+  <script src="en.js"></script>
+  <script src="block/start.js"></script>
+  <script src="block/len_block.js"></script>
+  <script src="block/bre_block.js"></script>
+  <script src="block/draw.js"></script>
+  <script src="block/diagnol.js"></script>
+  <script src="generator/start.js"></script>
+  <script src="generator/len_block.js"></script>
+  <script src="generator/bre_block.js"></script>
+  <script src="generator/draw.js"></script>
+  <script src="generator/diagnol.js"></script>
+
+
+  <style>
+    body{
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1{
+      font-weight: normal;
+      font-size: 140%;  
+    }
+  </style>
+</head>
+
+
+  <body mode ="maker">
+    <header class="mdl-color--cyan-500">
+      <div style="display: inline;">
+        <img src="./../logo.png">
+        <h1 style="display: inline;position: absolute; right: 50px; font-size: 35px;">Explore Areas in Rectangle</h1>
+      </div>
+      <h1 class="mode-maker">Draw Rectangle and see that its area is sum of area of 2 Triangles</h1>
+
+    <p>
+      <button type="button" class="btn btn-primary" onclick ="runCode()">Draw</button>
+    </p>
+
+    <div id ="blocklyDiv" style="position: absolute; left: 0px; height: 480px; width: 700px;"></div>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <category name="Rectangle Demo">
+        <block type="start"></block>
+        <block type="len_block"></block>
+        <block type="bre_block"></block>
+        <block type="diagnol"></block>
+        <block type="draw"></block>
+      </category>
+    </xml>
+
+    <div id = "container" style="position: absolute; right: 5px; height: 500px; width: 500px;border:2px solid #000000;">
+      <div id ="containe">
+        <img id="animate" src="1.png" width="1" height="1">
+        <img id="animate2" src="2.png" width="1" height="1">
+      </div>
+      <svg height="500" width="500">
+        <polygon id = "t1" points="0,0 0,0 0,0" style="fill:yellow;stroke:purple;stroke-width:1" />
+        <polygon id = "t2" points="0,0 0,0 0,0" style="fill:yellow;stroke:purple;stroke-width:1" />
+        Sorry, your browser does not support inline SVG.
+      </svg>
+    </div>
+
+    <div id="modall" class="modall">
+
+      <div class="modal-content">
+        <h4>Find the area enclosed by the Rectangle drawn</h4>
+        <label for="fname">Rectangle Area: </label>
+        <input type="text" id="fname" name="fname"></br>
+        <h4>Find the area enclosed by the left Triangle drawn</h4>
+        <label for="iname">Left Triangle Area: </label>
+        <input type="text" id="iname" name="fname"></br>
+        <h4>Find the area enclosed by the right Triangle drawn</h4>
+        <label for="gname">Right Triangle Area: </label>
+        <input type="text" id="gname" name="fname"></br>
+        <h4>Add the areas of two Triangles</h4>
+        <label for="hname">Total Area: </label>
+      <input type="text" id="hname" name="fname"></br>
+      </br> 
+      <div class="btnr">
+      <button class="btn btn-primary" onclick="checkAnswer()"> Submit </button>
+      <div id = "ans" style="position: absolute; right: 60px; top: 315px; font-size: 20px;"></div>
+      </div>
+      </div>
+    <script>
+    Blockly.JavaScript.addReservedWords('code');
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    </script>
+
+    <script>
+
+var blocklyArea = document.getElementById('blocklyArea');
+  var blocklyDiv = document.getElementById('blocklyDiv');
+  var workspace = Blockly.inject(blocklyDiv,
+      {toolbox: document.getElementById('toolbox')});
+  var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    Blockly.svgResize(workspace);
+  };
+  window.addEventListener('resize', onresize, false);
+  onresize();
+  Blockly.svgResize(workspace);
+
+      function showCode(){
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        alert(code);
+      }
+
+      function runCode(){
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try{
+          eval(code);
+        } catch(e){
+          alert(e);
+          alert("hello")
+        }
+      }
+      function checkAnswer(){
+        var v1,v2,v3,v4,v5;
+        v1 = document.getElementById("fname").value;
+        v2 = document.getElementById("iname").value;
+        v3 = document.getElementById("gname").value;
+        v4 = document.getElementById("hname").value;
+        v5 = glen*gbre;
+        if(v1==v5 && v2==0.5*v5 && v3==0.5*v5 && v4==v5){
+          document.getElementById("ans").innerHTML = "Right Answer!!";
+        }
+        else
+        document.getElementById("ans").innerHTML = "Wrong Answer!!";
+      }
+    </script>
+
+
+  </body>
+  </html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Opposite Angles</title>
+
+  <link rel="stylesheet" href="bootstrap.css">
+  <style>
+   .draggable {
+  width: 250px;
+  height: 250px;
+  font-family: sans-serif;
+  font-size: 26px;
+  margin: 30px;
+  color: white;
+  text-align: center;
+  line-height: 130px;
+  position: relative;
+  user-select: none;
+  border: 2px solid black;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+.rotate {
+  border-radius: 50%;  
+  background: rgba(3, 169, 244, 0.3);
+  border: 1px solid rgba(3, 169, 244, 0.6);  
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: -15px;
+  top: -15px;
+}
+
+    </style>
+
+  <script src="jquery.js"></script>
+  <script src="bootstrap.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/utils/Draggable.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js'></script><script  src="./script.js"></script>
+
+<script src="blockly_compressed.js"></script>
+<script src="javascript_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+<script src="en.js"></script>
+<script src="blocks.js"></script>
+<script src="generator.js"></script>
+<script src="script.js"></script>
+
+
+
+  <style>
+    body{
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1{
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+
+
+  <body mode ="maker">
+    <header class="mdl-color--cyan-500">
+      <div style="display: inline;">
+        <img src="logo.png">
+        <h1 style="display: inline;position: absolute; right: 50px; font-size: 35px;">Congruency in Triangles</h1>
+      </div>
+      <h1 class="mode-maker">Explore Congruency by superimposing a drawn triangle by a generated on</h1>
+
+    <!-- <p>
+      <button onclick ="showCode()">Show JavaScript</button>
+      <button onclick ="runCode()">Run JavaScript</button>
+    </p> -->
+    <div id ="blocklyDiv" style="position: absolute; left: 0px; height: 480px; width: 680px;"></div>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <category name="Congruency">
+        <block type="start"></block>
+        <block type="coordinates"></block>
+        <block type="draw"></block>
+      </category>
+    </xml>
+
+    <div id = "container" style="position: absolute; right: 10px; height: 500px; width: 580px;border:2px solid black;">
+      <h1 style="position: absolute; left: 45px; top: 25px">Blockly-made Triangle</h1>
+      <div id="drag-1" class="draggable" style="position: absolute; left: 0px; bottom: 35px; background-image:url('axis.png');">
+        <svg width="250px" height="250px" left="0px" top="0px">
+          <polygon id="poly1" style="fill:lime;stroke:purple;"></polygon>
+        </svg>
+        <div class="rotate"></div>
+      </div>
+      <h1 style="position: absolute; right: 65px; top: 25px">Generated Triangle</h1>
+      <div id="drag-2" class="draggable" style="position: absolute; right: 0px; bottom: 35px;">
+        <svg width="250px" height="250px" left="0px" top="0px">
+          <polygon id="poly2" style="fill:lime;stroke:purple;" ></polygon>
+        </svg>
+        <div class="rotate"></div>
+      </div>
+    </div>
+    
+    <div style="position: absolute; top: 635px; left:5%; width: 90%; padding: 10px; background-color: lightgray; border-radius: 20px;">
+      <p style="font-size: 20px;">Are the 2 triangles above congruent?</p>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" value="1" onclick="passans(this.value)" checked> Yes
+      </label>
+      <label class="radio-inline">
+        <input type="radio" id="r2" name="optradio" value="2" onclick="passans(this.value)"> No
+      </label>
+      <br>
+      <p id = "result" style="padding: 5px; display: inline; font-size: 20px;"></p>
+      <button class="btn btn-primary" onclick="findans()" style="position: absolute; right: 30px; top: 60px">Submit</button>
+     
+    </div>
+
+    
+
+    <script>
+      var x1=0,x2=0,x3=0,y1=0,y2=0,y3=0,ans = true,cur_answer;
+      var workspace = Blockly.inject('blocklyDiv',
+      {media: '../../media/',
+      toolbox: document.getElementById('toolbox')});
+
+      function passans(answer){
+        ans = answer=="1";
+      }
+
+      function findans(){
+        if(ans==cur_answer){
+          document.getElementById("result").innerHTML = "Right answer!!";
+        }
+        else{
+          document.getElementById("result").innerHTML = "Wrong answer!!";
+        }
+      }
+      function myUpdateFunction(event) {
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        console.log(code);
+        try{
+          eval(code);
+        } catch(e){
+          alert(e);
+        }
+        cur_answer = (Math.random()>=0.5);
+        if(x1 && x2 && x3 && y1 && y2 && y3){
+          var poly1 = document.getElementById("poly1"), poly2 = document.getElementById("poly2");
+          var points = ""+x1+","+y1+" "+x2+","+y2+" "+x3+","+y3;
+          console.log(points);
+          poly1.setAttribute('points',points);
+          if(!cur_answer){
+            x1+=10;x2-=10;y1-=10;y2+=10;
+            points = ""+x1+","+y1+" "+x2+","+y2+" "+x3+","+y3;
+          }
+          poly2.setAttribute('points',points);
+          var xm = (x1+x2+x3)/3, ym = (y1+y2+y3)/3, ang = 180+(120*(0.5-Math.random())), rt = "rotate("+ang+","+xm+","+ym+")";
+          poly2.setAttribute('transform',rt);
+        }
+
+      }
+      workspace.addChangeListener(myUpdateFunction);
+
+      function showCode(){
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        alert(code);
+      }
+
+      function runCode(){
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try{
+          eval(code);
+        } catch(e){
+          alert(e);
+        }
+      }
+    </script>
+
+<script>
+  Blockly.JavaScript.addReservedWords('code');
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+  var rotationDrag = Draggable.create($(".draggable"), {
+  type: "rotation",
+  throwProps: true,
+  onPress: setDraggable,
+});
+
+  $.each(rotationDrag, function(index) {
+  rotationDrag[index].disable();
+});
+
+var translateDrag = Draggable.create($(".draggable"), {
+  throwProps: true,
+  onPress: setDraggable,
+});
+
+function setDraggable(event) {
+  var index = rotationDrag.findIndex(i => i.target === this.target);
+  var isRotation = this.vars.type === "rotation";
+  var isCorner   = event.target.className === 'rotate';
+
+  if (isCorner) {
+    if (!isRotation) {
+      translateDrag[index].disable();
+      rotationDrag[index].enable().startDrag(event);
+    }
+  } else if (isRotation) {
+    rotationDrag[index].disable();
+    translateDrag[index].enable().startDrag(event);
+  }
+}
+
+  </script>
+
+
+  </body>
+  </html>

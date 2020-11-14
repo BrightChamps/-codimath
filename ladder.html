@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Opposite Angles</title>
+
+  <link rel="stylesheet" href="bootstrap.css">
+  <style>
+    #containe {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      background: yellow;
+      border: purple;
+      border-width: 1px;
+      display: none;
+    }
+    #animate {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    #animate2 {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      display: none;
+    }
+
+    .modall {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 10000000; /* Sit on top */
+      padding-top: 150px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 700px; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 300px;
+}
+
+    </style>
+
+  <script src="jquery.js"></script>
+  <script src="bootstrap.js"></script>
+  
+<script src="blockly_compressed.js"></script>
+<script src="javascript_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+<script src="en.js"></script>
+<script src="block/ladder_len.js"></script>
+<script src="block/ladder_start.js"></script>
+<script src="block/angle_hori.js"></script>
+<script src="block/angle_verti.js"></script>
+<script src="generator/ladder_start.js"></script>
+<script src="generator/ladder_len.js"></script>
+<script src="generator/angle_hori.js"></script>
+<script src="generator/angle_verti.js"></script>
+
+<script>
+  var bc=0,lc=0,x1,x2,x3,x4,y1,y2,y3,y4,ang1,ang2;
+  var main_ang=0,lad_len=100;
+  var Movie = {
+    HEIGHT: 500,
+    WIDTH: 500
+  };
+  var PI2 = Math.PI * 2;
+  function makecanvas() {
+    var canvas = document.querySelector('canvas');
+    var cx = canvas.getContext('2d');
+    var mx = my = angle = x = y = dist = grd = 0;
+    canvas.height = canvas.width = w = h = 500;
+
+    cx.fillStyle = bc;
+      cx.fillRect(0,0,w,h);
+      cx.strokeStyle = lc;
+      cx.beginPath();
+      cx.lineWidth = 5;
+      cx.moveTo(250-(100/2),450);
+      cx.lineTo(250+(100/2),450);
+      cx.stroke();
+      cx.closePath();
+      cx.beginPath();
+      grd = cx.createRadialGradient(250,450,3,250,450,10);
+      grd.addColorStop(0, "white");
+      grd.addColorStop(1, "red");
+      cx.fillStyle = grd;  
+      cx.arc( 250, 450, 10 , 0, Math.PI*2, true );
+      cx.fill();      
+      cx.closePath();
+
+    
+    canvas.addEventListener('mousemove', function(ev) {
+        canvas.width = 500;
+        var rect = canvas.getBoundingClientRect();
+      x = ev.clientX-rect.left; 
+      y = Math.min(ev.clientY-rect.top,450);
+      
+      cx.fillStyle = bc;
+      cx.fillRect(0,0,w,h);
+
+      cx.beginPath();
+      cx.moveTo(250, 450);
+      cx.strokeStyle = lc;
+      cx.lineTo(x, y);
+      cx.stroke();
+      cx.closePath();
+
+      cx.beginPath();
+      cx.lineWidth = 5;
+      cx.moveTo(250-(len/2),450);
+      cx.lineTo(250+(len/2),450);
+      cx.stroke();
+      cx.closePath();
+      
+      cx.beginPath();
+      grd = cx.createRadialGradient(x,y,3,x,y,10);
+      grd.addColorStop(0, "white");
+      grd.addColorStop(1, "orange");
+      cx.fillStyle = grd;  
+      cx.arc( x, y, 10 , 0, Math.PI*2, true );
+      cx.fill();      
+      cx.closePath();
+
+      cx.beginPath();
+      grd = cx.createRadialGradient(250,450,3,250,450,10);
+      grd.addColorStop(0, "white");
+      grd.addColorStop(1, "red");
+      cx.fillStyle = grd;  
+      cx.arc( 250, 450, 10 , 0, Math.PI*2, true );
+      cx.fill();      
+      cx.closePath();
+      
+      
+      mx = x - 250;
+      my = y - 450;
+      dist = Math.sqrt(mx * mx + my * my);
+      angle = -1*Math.atan2( my, mx ) * 180 / Math.PI;
+      document.getElementById("a1").innerHTML = angle;
+      document.getElementById("a2").innerHTML = 180-angle;
+
+    });
+    document.getElementById("modall").style.display = "block"
+  }
+</script>
+
+  <style>
+    body{
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1{
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+
+<script>
+    function changediv(){
+        var lad = document.getElementById("ladder");
+        lad.style.width = lad_len+"px";
+        lad.style.backgroundSize = lad_len+"px 30px";
+        lad.style.transformOrigin = "bottom left";
+        lad.style.transform = "translate(0px,"+(-lad_len*Math.sin((main_ang/180)*Math.PI))+"px) "+"rotate("+main_ang+"deg)";
+        document.getElementById("pfloor").innerHTML= "Angle made with floor is :"+main_ang;
+        document.getElementById("pwall").innerHTML= "Angle made with wall is :"+(90-main_ang);
+    }
+</script>
+  <body mode ="maker">
+    <header class="mdl-color--cyan-500">
+      <div style="display: inline;">
+        <img src="logo.png">
+        <h1 style="display: inline;position: absolute; right: 50px; font-size: 35px;">Angles in Triangles</h1>
+    </div>
+      <h1 class="mode-maker">Explore the Ladder Problem to find sum of both the Angles is always 90</h1>
+
+    <!-- <p>
+      <button onclick ="showCode()">Show JavaScript</button>
+      <button onclick ="runCode()">Run JavaScript</button>
+    </p> -->
+    <div id ="blocklyDiv" style="position: absolute; left: 0px; height: 480px; width: 700px;"></div>
+
+    <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <category name="Ladder Problem">
+        <block type="ladder_start"></block>
+        <block type="ladder_len"></block>
+        <block type="angle_verti"></block>
+      </category>
+    </xml>
+
+    <div id = "container" style="position: absolute; right: 10px; height: 500px; width: 500px;border:2px solid #000000;">
+        <div id="wall" style="position: relative; left: 0px; top: 0px; height: 500px; width: 500px;background-image: url('wall-bg.png'); background-size: 500px 500px;">
+          <div style="position: absolute; right: 5px;top: 0px;">
+            <p id="pfloor"> Angle made with floor is :</p>
+            <p id="pwall" style="position:absolute; top: 15px;">Angle made with wall is :</p>
+          </div>  
+          <div id="ladder" style="position: absolute; left: 120px;bottom: 140px;height: 30px; width: 100px;background-image: url('lad.png'); background-size: 100px 30px;"></div>
+        </div>
+    </div>
+
+    <div id="modall" class="modall">
+      <div class="modal-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Angle With</th>
+              <th scope="col">Angle Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>+ve X-axis</td>
+              <td id="a1">0</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>-ve X-axis</td>
+              <td id="a2">0</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Total Angle</td>
+              <td>180</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <script>
+
+      var workspace = Blockly.inject('blocklyDiv',
+      {media: '../../media/',
+      toolbox: document.getElementById('toolbox')});
+
+
+      function myUpdateFunction(event) {
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        console.log(code);
+        try{
+          eval(code);
+        } catch(e){
+          alert(e);
+        }
+        console.log(code);
+        changediv(); 
+
+      }
+      workspace.addChangeListener(myUpdateFunction);
+
+      function drawAnchor(px,py,color) {
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, PI2);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+}
+
+function drawAngleSymbol(pt3, pt2, pt1,cond) {
+    var dx1 = pt1.x - pt2.x;
+    var dy1 = pt1.y - pt2.y;
+    var dx2 = pt3.x - pt2.x;
+    var dy2 = pt3.y - pt2.y;
+    var a1 = Math.atan2(dy1, dx1);
+    var a2 = Math.atan2(dy2, dx2);
+    var a = parseInt((a2 - a1) * 180 / Math.PI + 360) % 360;
+    if(cond==1) {ang1 = a;}
+    else {ang2 = a;}
+    // draw angleSymbol
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(pt2.x, pt2.y);
+    if(a>180)
+    {ctx.arc(pt2.x, pt2.y, 20, a1, a2,true);}
+    else
+    {ctx.arc(pt2.x, pt2.y, 20, a1, a2);}
+    ctx.closePath();
+    ctx.fillStyle = "red";
+    ctx.globalAlpha = 0.3;
+    if(cond==2) ctx.globalAlpha = 0.7;
+    ctx.fill();
+
+}
+
+      function showCode(){
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        alert(code);
+      }
+
+      function runCode(){
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+        try{
+          eval(code);
+        } catch(e){
+          alert(e);
+        }
+      }
+    </script>
+
+<script>
+  Blockly.JavaScript.addReservedWords('code');
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  </script>
+
+
+  </body>
+  </html>
