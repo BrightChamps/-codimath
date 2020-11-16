@@ -1,0 +1,203 @@
+button.primary {
+  /* Can't use "text-align: start" due to IE. */
+  text-align: left;
+}
+html[dir="RTL"] button.primary {
+  text-align: right;
+}
+.slide{
+  position: fixed;
+  left: 700px;
+  top: 50px;
+  z-index: 1;
+  opacity:0;
+  padding-right: 20px;
+  transition: opacity 0.5s;
+  /* display: none; */
+}
+.active-slide{
+  /* display: none; */
+  opacity: 1;
+  z-index: 2;
+}
+.choice-container {
+  display: flex;
+  margin-bottom: 8px;
+  width: 100%;
+  /* font-size: 1rem; */
+  /* height: 2rem; */
+  border: 1px solid rgb(86, 165, 235, 0.25);
+  background-color: white;
+}
+
+.choice-container:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.choice-prefix {
+  height: 2rem;
+  width: 50px;
+  /* padding-left: 10px; */
+  text-align: center;
+  padding-top: .4rem;
+  font-family: Arial, sans-serif;
+  font-size:1.2rem;
+  background-color: #56a5eb;
+  /* height: 100% */
+  color: white;
+}
+
+.choice-text {
+  padding: .45rem .5rem;
+  font-family: Arial, sans-serif;
+  font-size:1.1rem;
+}
+
+.correct {
+  background-color: #28a745;
+}
+
+.incorrect {
+  background-color: #dc3545;
+}
+.questions {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  width: 100%;
+  font-size:27px;
+  color: #2E2E2E;
+  margin-bottom: 10px;
+}
+/*
+div.answers {
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-size:20px;
+  color: #2E2E2E;
+  margin-bottom: 10px;
+} */
+/* input.answer {
+  margin-bottom: 10px;
+} */
+#blockly {
+  /* display: none; */
+  position: fixed;
+  bottom: 0px;
+}
+#Container {
+  position: fixed;
+  left: 700px;
+  top: 50px;
+  padding-right: 20px;
+  /* height: 500px; */
+  margin-top: 0px;
+  /* border: 1px solid #ccc; */
+}
+#previous {
+  position: fixed;
+  left: 700px;
+  top: 550px;
+}
+#submit {
+  position: fixed;
+  right: 120px;
+  top: 550px;
+}
+#next {
+  position: fixed;
+  right: 120px;
+  top: 550px;
+}
+#visualization {
+  z-index: 2;
+}
+#display {
+  border: 1px solid #ccc;
+}
+#support1div {
+  /* border: 1px solid #ccc; */
+  position : absolute;
+}
+#support2div {
+  /* border: 1px solid #ccc; */
+  position : absolute;
+}
+#support3div {
+  /* border: 1px solid #ccc; */
+  position : absolute;
+}
+#support4div {
+  /* border: 1px solid #ccc; */
+  position : absolute;
+}
+#support5div {
+  /* border: 1px solid #ccc; */
+  position : absolute;
+}
+#rider {
+  position : absolute;
+  z-index: 1;
+}
+#downloadImageLink {
+  display: none;
+}
+#sampleHelp2 {
+  height: 50px;
+  width: 250px;
+}
+
+code {
+  font-size: 150%; margin: 0 1em;
+}
+
+html code.rtl {
+  display: none;
+}
+html code.ltr {
+  display: inline;
+}
+html[dir="RTL"] code.rtl {
+  display: inline;
+}
+html[dir="RTL"] code.ltr {
+  display: none;
+}
+
+#coordinates {
+  display: none;
+  font-size: 10pt;
+  margin-top: 5px;
+  position: absolute;
+  width: 700px;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+}
+#x {
+  position: absolute;
+  left: 300px;
+}
+#y {
+  position: absolute;
+  left: 350px;
+}
+
+/* Slider. */
+.sliderTrack {
+  stroke: #aaa;
+  stroke-width: 6px;
+  stroke-linecap: round;
+}
+.sliderKnob {
+  fill: #ddd;
+  stroke: #bbc;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+}
+.sliderKnob:hover {
+  fill: #eee;
+}
