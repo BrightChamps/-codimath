@@ -28,16 +28,24 @@
     <span id="Circus_y1">{msg meaning="Circus.Y1" desc="Label for the y-coordinate of the start of a line"}y{/msg}</span>
     <span id="Circus_x2">{msg meaning="Circus.X2" desc="Label for the x-coordinate of the end of a line."}x{/msg}</span>
     <span id="Circus_y2">{msg meaning="Circus.Y2" desc="Label for the y-coordinate of the end of a line."}y{/msg}</span>
+    <span id="Circus_X1">{msg meaning="Circus.X1" desc="Label for the x-coordinate of the start of a line."}X1{/msg}</span>
+    <span id="Circus_X2">{msg meaning="Circus.X2" desc="Label for the x-coordinate of the start of a line."}X2{/msg}</span>
+    <span id="Circus_Y1">{msg meaning="Circus.Y1" desc="Label for the x-coordinate of the start of a line."}Y1{/msg}</span>
+    <span id="Circus_Y2">{msg meaning="Circus.Y2" desc="Label for the x-coordinate of the start of a line."}Y2{/msg}</span>
 
     <span id="Circus_radius">{{msg meaning="Circus.radius" desc="Label for a circle's radius input.\n{lb}{lb}Identical|Radius{rb}{rb}"}}radius{{/msg}}</span>
     <span id="Circus_width">{{msg meaning="Circus.width" desc="Label for a circle or line's width input.\n{lb}{lb}Identical|Width{rb}{rb}"}}width{{/msg}}</span>
     <span id="Circus_length">{{msg meaning="Circus.length" desc="Label for a line's length input.\n{lb}{lb}Identical|Width{rb}{rb}"}}length{{/msg}}</span>
     <span id="Circus_height">{{msg meaning="Circus.height" desc="Label for a rectangle's height input.\n{lb}{lb}Identical|Height{rb}{rb}"}}height{{/msg}}</span>
     <span id="Circus_circleTooltip">{msg meaning="Circus.circleTooltip" desc="tooltip"}Draws a circle at the specified location and with the specified radius.{/msg}</span>
+    <span id="Circus_midpointTooltip">{msg meaning="Circus.circleTooltip" desc="tooltip"}Returns the value of Mid point of two points.{/msg}</span>
+    <span id="Circus_radiusTooltip">{msg meaning="Circus.circleTooltip" desc="tooltip"}Finds out the radius of the circle with given centre and point on circumference.{/msg}</span>
     <span id="Circus_circleDraw">{{msg meaning="Circus.circleDraw" desc="Command to draw a circle.\n{lb}{lb}Identical|Circle{rb}{rb}"}}circle{{/msg}}</span>
     <span id="Circus_lineTooltip">{msg meaning="Circus.lineTooltip" desc="tooltip"}Draws a line from one point to another with the specified width.{/msg}</span>
     <span id="Circus_perpendicularTooltip">{msg meaning="Circus.lineTooltip" desc="tooltip"}Draws a line at start x, start y perpendicular to line given by end x end y with given length(can be negative).{/msg}</span>
     <span id="Circus_lineDraw">{{msg meaning="Circus.lineDraw" desc="Command to draw a rectangle.\n{lb}{lb}Identical|Line{rb}{rb}"}}line{{/msg}}</span>
+    <span id="Circus_midpoint">{{msg meaning="Circus.lineDraw" desc="Command to draw a rectangle.\n{lb}{lb}Identical|Line{rb}{rb}"}}Mid Point of{{/msg}}</span>
+    <span id="Circus_radiusfunction">{{msg meaning="Circus.lineDraw" desc="Command to draw a rectangle.\n{lb}{lb}Identical|Line{rb}{rb}"}}Radius{{/msg}}</span>
     <span id="Circus_perpendicularlineDraw">{{msg meaning="Circus.perpendicularlineDraw" desc="Command to draw a rectangle.\n{lb}{lb}Identical|Line{rb}{rb}"}}Perpendicular line at{{/msg}}</span>
     <span id="Circus_perpendiculartoline">{{msg meaning="Circus.perpendiculartoline" desc="Command to draw a rectangle.\n{lb}{lb}Identical|Line{rb}{rb}"}}Perpendicular to line{{/msg}}</span>
 
@@ -69,6 +77,9 @@
     <div id="coordinates">
       <span id="x"></span>
       <span id="y"></span>
+    </div>
+    <div id="functionvalue" style="display : none">
+      <span id="returnvalue"></span>
     </div>
     <div id="rider" width="115" height="260">
     <canvas id="ridercanvas" width="115" height="260"></canvas>
@@ -145,10 +156,6 @@
     <div style="padding-bottom: 0.7ex">
       {if $ij.level == 1}
         {msg meaning="Circus.helpText1" desc="Instructions."}
-        Alert : Here you need to stack blocks to complete level this is a dynamic level where changing the value of a block is instantaneously reflected So stack blocks to make different shapes
-        <br>
-        <br>
-        <br>
           Use Line and perpendicular line blocks to :
           <br>
           Find the circumcentre of the triangle formed with various combinations of supports named A, B, C, D, E use the inner points of every support example : Bottom left corner of support B
@@ -262,6 +269,50 @@
         <value name="WIDTH">
           <shadow type="math_number">
             <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="circus_midpoint">
+        <value name="X1">
+          <shadow type="math_number">
+            <field name="NUM">40</field>
+          </shadow>
+        </value>
+        <value name="Y1">
+          <shadow type="math_number">
+            <field name="NUM">40</field>
+          </shadow>
+        </value>
+        <value name="X2">
+          <shadow type="math_number">
+            <field name="NUM">60</field>
+          </shadow>
+        </value>
+        <value name="Y2">
+          <shadow type="math_number">
+            <field name="NUM">60</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="circus_radius">
+        <value name="X1">
+          <shadow type="math_number">
+            <field name="NUM">40</field>
+          </shadow>
+        </value>
+        <value name="Y1">
+          <shadow type="math_number">
+            <field name="NUM">40</field>
+          </shadow>
+        </value>
+        <value name="X2">
+          <shadow type="math_number">
+            <field name="NUM">60</field>
+          </shadow>
+        </value>
+        <value name="Y2">
+          <shadow type="math_number">
+            <field name="NUM">60</field>
           </shadow>
         </value>
       </block>

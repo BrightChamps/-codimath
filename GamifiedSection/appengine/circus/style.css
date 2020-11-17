@@ -168,6 +168,21 @@ html[dir="RTL"] code.ltr {
   left: 350px;
 }
 
+#functionvalue {
+  display: none;
+  font-size: 10pt;
+  margin-top: 5px;
+  position: absolute;
+  width: 700px;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+}
+#returnvalue {
+  position: absolute;
+  left: 20px;
+}
 /* Slider. */
 .sliderTrack {
   stroke: #aaa;

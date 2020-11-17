@@ -134,6 +134,91 @@ Blockly.JavaScript['circus_line'] = function(block) {
       width + ');\n';
 };
 
+Blockly.Blocks['circus_midpoint'] = {
+  /**
+   * Block for drawing a line.
+   * @this {Blockly.Block}
+   */
+  init: function() {
+    this.setColour(Circus.Blocks.SHAPE_HUE);
+    this.appendValueInput('X1')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_midpoint'))
+        .appendField(BlocklyGames.getMsg('Circus_X1'));
+    this.appendValueInput('Y1')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_Y1'));
+    this.appendValueInput('X2')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_X2'));
+    this.appendValueInput('Y2')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_Y2'));
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(BlocklyGames.getMsg('Circus_midpointTooltip'));
+  }
+};
+
+Blockly.JavaScript['circus_midpoint'] = function(block) {
+  // Generate JavaScript for drawing a line.
+  var x1 = Blockly.JavaScript.valueToCode(block, 'X1',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  var y1 = Blockly.JavaScript.valueToCode(block, 'Y1',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  var x2 = Blockly.JavaScript.valueToCode(block, 'X2',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  var y2 = Blockly.JavaScript.valueToCode(block, 'Y2',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  return 'midpoint(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ');\n';
+};
+Blockly.Blocks['circus_radius'] = {
+  /**
+   * Block for drawing a line.
+   * @this {Blockly.Block}
+   */
+  init: function() {
+    this.setColour(Circus.Blocks.SHAPE_HUE);
+    this.appendValueInput('X1')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_radiusfunction'))
+        .appendField(BlocklyGames.getMsg('Circus_X1'));
+    this.appendValueInput('Y1')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_Y1'));
+    this.appendValueInput('X2')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_X2'));
+    this.appendValueInput('Y2')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(BlocklyGames.getMsg('Circus_Y2'));
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(BlocklyGames.getMsg('Circus_radiusTooltip'));
+  }
+};
+
+Blockly.JavaScript['circus_radius'] = function(block) {
+  // Generate JavaScript for drawing a line.
+  var x1 = Blockly.JavaScript.valueToCode(block, 'X1',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  var y1 = Blockly.JavaScript.valueToCode(block, 'Y1',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  var x2 = Blockly.JavaScript.valueToCode(block, 'X2',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  var y2 = Blockly.JavaScript.valueToCode(block, 'Y2',
+      Blockly.JavaScript.ORDER_COMMA) || '0';
+  return 'radiusCalculate(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ');\n';
+};
+
 Blockly.Blocks['circus_perpendicularline'] = {
   /**
    * Block for drawing a line.

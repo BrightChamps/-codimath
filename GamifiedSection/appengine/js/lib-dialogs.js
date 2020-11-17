@@ -346,77 +346,77 @@ BlocklyDialogs.abortOffer = function() {
  * Congratulates the user for completing the level and offers to
  * direct them to the next level, if available.
  */
-BlocklyDialogs.congratulations = function(val) {
-  var content = document.getElementById('dialogDone');
-  var style = {
-    width: '40%',
-    left: '30%',
-    top: '3em'
-  };
-BlocklyDialogs.actualanswer = val;
-  // Add the user's code.
-  if (BlocklyInterface.workspace) {
-    var linesText = document.getElementById('dialogLinesText');
-    linesText.textContent = '';
-    var code = BlocklyInterface.executedJsCode;
-    code = BlocklyInterface.stripCode(code);
-    var noComments = code.replace(/\/\/[^\n]*/g, '');  // Inline comments.
-    noComments = noComments.replace(/\/\*.*\*\//g, '');  /* Block comments. */
-    noComments = noComments.replace(/[ \t]+\n/g, '\n');  // Trailing spaces.
-    noComments = noComments.replace(/\n+/g, '\n');  // Blank lines.
-    noComments = noComments.trim();
-    var lineCount = noComments.split('\n').length;
-    // if (typeof prettyPrintOne == 'function') {
-    //   code = pre.innerHTML;
-    //   code = prettyPrintOne(code, 'js');
-    //   pre.innerHTML = code;
-    // }
-    // if (lineCount == 1) {
-    //   var text = BlocklyGames.getMsg('Games_linesOfCode1');
-    // } else {
-    //   var text = BlocklyGames.getMsg('Games_linesOfCode2')
-    //       .replace('%1', String(lineCount));
-    // }
-    var text = 'What is the length of the path traveled by the character (Given each block is represented as 1 unit) :'
-    linesText.appendChild(document.createTextNode(text));
-  }
+ BlocklyDialogs.congratulations = function() {
+   var content = document.getElementById('dialogDone');
+   var style = {
+     width: '40%',
+     left: '30%',
+     top: '3em'
+   };
 
-  // if (BlocklyGames.LEVEL < BlocklyGames.MAX_LEVEL) {
-  //   var text = BlocklyGames.getMsg('Games_nextLevel')
-  //       .replace('%1', String(BlocklyGames.LEVEL + 1));
-  // } else {
-  //   var text = BlocklyGames.getMsg('Games_finalLevel');
-  // }
-  // alert(val);
-var text = "Sorry you entered wrong answer please try again!"
-  var cancel = document.getElementById('doneSubmit');
-  cancel.addEventListener('click', BlocklyDialogs.checkinput);
-  // cancel.addEventListener('touchend', BlocklyDialogs.checkinput, val);
-  var ok = document.getElementById('doneOk');
-  ok.style.display = "none";
-  ok.addEventListener('click', BlocklyInterface.nextLevel, true);
-  ok.addEventListener('touchend', BlocklyInterface.nextLevel, true);
+   // Add the user's code.
+   if (BlocklyInterface.workspace) {
+     var linesText = document.getElementById('dialogLinesText');
+     linesText.textContent = '';
+     var code = BlocklyInterface.executedJsCode;
+     code = BlocklyInterface.stripCode(code);
+     var noComments = code.replace(/\/\/[^\n]*/g, '');  // Inline comments.
+     noComments = noComments.replace(/\/\*.*\*\//g, '');  /* Block comments. */
+     noComments = noComments.replace(/[ \t]+\n/g, '\n');  // Trailing spaces.
+     noComments = noComments.replace(/\n+/g, '\n');  // Blank lines.
+     noComments = noComments.trim();
+     var lineCount = noComments.split('\n').length;
+     var pre = document.getElementById('containerCode');
+     pre.textContent = code;
+     if (typeof prettyPrintOne == 'function') {
+       code = pre.innerHTML;
+       code = prettyPrintOne(code, 'js');
+       pre.innerHTML = code;
+     }
+     if (lineCount == 1) {
+       var text = BlocklyGames.getMsg('Games_linesOfCode1');
+     } else {
+       var text = BlocklyGames.getMsg('Games_linesOfCode2')
+           .replace('%1', String(lineCount));
+     }
+     linesText.appendChild(document.createTextNode(text));
+   }
 
-  BlocklyDialogs.showDialog(content, null, false, true, style,
-      function() {
-        document.body.removeEventListener('keydown',
-            BlocklyDialogs.congratulationsKeyDown, true);
-        });
-  document.body.addEventListener('keydown',
-      BlocklyDialogs.congratulationsKeyDown, true);
-  document.getElementById('dialogDoneText').style.display = "none";
-  document.getElementById('dialogDoneText').textContent = text;
-};
-BlocklyDialogs.checkinput = function(val){
-  if(document.getElementById('containerCode').value == BlocklyDialogs.actualanswer)
-  {
-    document.getElementById('doneOk').style.display = 'initial';
-    document.getElementById('doneSubmit').style.display = 'none';
-  }
-  else {
-    document.getElementById('dialogDoneText').style.display = "initial";
-  }
-}
+   var text = 'Are you ready for next level?';
+   // var cancel = document.getElementById('doneCancel');
+   // cancel.addEventListener('click', BlocklyDialogs.hideDialog, true);
+   // cancel.addEventListener('touchend', BlocklyDialogs.hideDialog, true);
+   var ok = document.getElementById('doneOk');
+   ok.addEventListener('click', BlocklyInterface.nextLevel, true);
+   ok.addEventListener('touchend', BlocklyInterface.nextLevel, true);
+
+   BlocklyDialogs.showDialog(content, null, false, true, style,
+       function() {
+         document.body.removeEventListener('keydown',
+             BlocklyDialogs.congratulationsKeyDown, true);
+         });
+   document.body.addEventListener('keydown',
+       BlocklyDialogs.congratulationsKeyDown, true);
+
+   document.getElementById('dialogDoneText').textContent = text;
+ };
+
+ /**
+  * If the user preses enter, escape, or space, hide the dialog.
+  * @param {!Event} e Keyboard event.
+  * @private
+  */
+ BlocklyDialogs.dialogKeyDown_ = function(e) {
+   if (BlocklyDialogs.isDialogVisible_) {
+     if (e.keyCode == 13 ||
+         e.keyCode == 27 ||
+         e.keyCode == 32) {
+       BlocklyDialogs.hideDialog(true);
+       e.stopPropagation();
+       e.preventDefault();
+     }
+   }
+ };
 /**
  * If the user preses enter, escape, or space, hide the dialog.
  * @param {!Event} e Keyboard event.
@@ -455,18 +455,18 @@ BlocklyDialogs.stopDialogKeyDown = function() {
  * Enter and space move to the next level, escape does not.
  * @param {!Event} e Keyboard event.
  */
-BlocklyDialogs.congratulationsKeyDown = function(e) {
-  if (e.keyCode == 13 ||
-      e.keyCode == 27 ||
-      e.keyCode == 32) {
-    BlocklyDialogs.hideDialog(true);
-    e.stopPropagation();
-    e.preventDefault();
-    if (e.keyCode != 27) {
-        BlocklyInterface.nextLevel();
-    }
-  }
-};
+ BlocklyDialogs.congratulationsKeyDown = function(e) {
+   if (e.keyCode == 13 ||
+       e.keyCode == 27 ||
+       e.keyCode == 32) {
+     // BlocklyDialogs.hideDialog(true);
+     e.stopPropagation();
+     e.preventDefault();
+     if (e.keyCode != 27) {
+       BlocklyInterface.nextLevel();
+     }
+   }
+ };
 
 /**
  * If the user presses enter, escape, or space, hide the dialog.

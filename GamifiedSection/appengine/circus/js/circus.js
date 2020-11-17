@@ -1006,6 +1006,16 @@ Circus.initInterpreter = function(interpreter, globalObject) {
   };
   interpreter.setProperty(globalObject, 'line',
       interpreter.createNativeFunction(wrapper));
+  wrapper = function(x1, y1, x2, y2) {
+    Circus.midpoint(x1, y1, x2, y2);
+  };
+  interpreter.setProperty(globalObject, 'midpoint',
+      interpreter.createNativeFunction(wrapper));
+  wrapper = function(x1, y1, x2, y2) {
+    Circus.radiusCalculate(x1, y1, x2, y2);
+  };
+  interpreter.setProperty(globalObject, 'radiusCalculate',
+      interpreter.createNativeFunction(wrapper));
 
   wrapper = function(x1, y1, x2, y2, w, l) {
     Circus.perpendicularline(x1, y1, x2, y2, w, l);
@@ -1073,6 +1083,18 @@ Circus.line = function(x1, y1, x2, y2, width) {
   Circus.ctxScratch.lineWidth = Math.max(width, 0);
   Circus.ctxScratch.stroke();
 };
+
+Circus.midpoint = function(x1,y1,x2,y2) {
+  var answerX = (x1 + x2) / 2;
+  var answerY = (y1 + y2) / 2;
+  document.getElementById('functionvalue').style.display = 'block';
+  document.getElementById('returnvalue').textContent = 'Mid Point : x = ' + answerX + '    y = ' + answerY;
+}
+Circus.radiusCalculate = function(x1,y1,x2,y2) {
+  var radius = Math.sqrt(Math.pow((x2-x1),2) + Math.pow((y2-y1),2))
+  document.getElementById('functionvalue').style.display = 'block';
+  document.getElementById('returnvalue').textContent = 'Radius : ' + radius;
+}
 
 Circus.perpendicularline = function(x1, y1, x2, y2, width, length) {
   y1 = 200 - y1;

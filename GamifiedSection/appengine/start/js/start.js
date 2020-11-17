@@ -715,7 +715,7 @@ Start.boyenteringcircus = function() {
   var y = 6 * Start.SQUARE_SIZE;
   BlocklyDialogs.hideDialog(true);
   setTimeout(function() {
-    BlocklyInterface.nextLevel();
+    BlocklyDialogs.congratulations();
   }, 8000);
   document.getElementById('buttontable').style.display = 'none';
   document.getElementById('blockly').style.display = 'none';
@@ -1003,7 +1003,7 @@ Start.reset = function(first) {
   // document.getElementById('runButton').style.display = 'none';
   // document.getElementById('resetButton').style.display = 'none';
   Start.pidList = [];
-  // Start.prevlog.clear();
+  Start.prevlog.clear();
   // Move Pegman into position.
   Start.drawclone = true;
   Start.pegmanX = Start.start1_.x;
@@ -1375,7 +1375,7 @@ Start.checkPositionch = function() {
 /**
  * Iterate through the recorded path and animate pegman's actions.
  */
-// Start.prevlog = new Set();
+Start.prevlog = new Set();
 Start.animate = function() {
   var action = Start.log.shift();
   if (!action) {
@@ -1384,7 +1384,7 @@ Start.animate = function() {
     return;
   }
 
-  // if(!Start.prevlog.has(action[1])){
+  if(!Start.prevlog.has(action[1])){
     BlocklyInterface.highlight(action[1]);
     // console.log(action[0]+',' +action[1]);
     switch (action[0]) {
@@ -1528,10 +1528,14 @@ Start.animate = function() {
         // },(Start.stepSpeed * Start.timevalue + 8000));
 
       }
-      // Start.prevlog.add(action[1]);
-  // }
+      if(Start.log[0] == null || Start.log[0][1] != action[1])
+      Start.prevlog.add(action[1]);
+      var factor = Start.timevalue;
+  }
+  else {
+    var factor = 1;
+  }
   // console.log(Start.prevlog);
-  var factor = Start.timevalue;
   Start.pidList.push(setTimeout(Start.animate, Start.stepSpeed * factor));
 };
 
@@ -2262,8 +2266,8 @@ Start.constrainDirection16 = function(d) {
  * @throws {false} If Pegman collides with a wall.
  */
 Start.move = function(direction, id) {
-  // if(!Start.prevlog.has(id))
-  // {
+  if(!Start.prevlog.has(id))
+  {
     if (!Start.isPath(direction, null)) {
       Start.log.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
       throw false;
@@ -2311,6 +2315,7 @@ Start.move = function(direction, id) {
     }
   // }
   Start.log.push([command, id]);
+  }
 };
 
 /**
@@ -2319,6 +2324,7 @@ Start.move = function(direction, id) {
  * @param {string} id ID of block that triggered this action.
  */
 Start.turn = function(direction, id) {
+  if(!Start.prevlog.has(id)) {
     switch (direction)
     {
       case 0:
@@ -2354,7 +2360,7 @@ Start.turn = function(direction, id) {
         Start.log.push(['NorthWest',id]);
         break;
     }
-  // }
+  }
   Start.pegmanDcheck = Start.constrainDirection4(Start.pegmanDcheck);
 };
 
@@ -2367,8 +2373,8 @@ Start.turn = function(direction, id) {
  * @return {boolean} True if there is a path.
  */
 Start.isPath = function(direction, id) {
-  // if(!Start.prevlog.has(id))
-  // {
+  if(!Start.prevlog.has(id))
+  {
     var effectiveDirection = Start.pegmanDcheck + direction;
     var square;
     var command;
@@ -2412,7 +2418,7 @@ Start.isPath = function(direction, id) {
         command = 'look_northwest';
         break;
     }
-  // }
+  }
   if(square !== Start.SquareType.WALL && square !== undefined)
   Start.checkPositionch();
   if (id) {
@@ -2468,8 +2474,8 @@ var text = "Sorry you entered wrong answer please try again!"
   // cancel.addEventListener('touchend', BlocklyDialogs.checkinput, val);
   var ok = document.getElementById('doneOk1');
   ok.style.display = "none";
-  ok.addEventListener('click', Start.boyenteringcircus, true);
-  ok.addEventListener('touchend', Start.boyenteringcircus, true);
+  ok.addEventListener('click', BlocklyDialogs.congratulations, true);
+  ok.addEventListener('touchend', BlocklyDialogs.congratulations, true);
 
   BlocklyDialogs.showDialog(content, null, false, true, style,
       function() {

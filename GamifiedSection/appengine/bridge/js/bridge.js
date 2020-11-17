@@ -474,7 +474,7 @@ Bridge.shiftscreen = function() {
         document.getElementById('ID' + x.toString()+ ',' + y.toString()).style.display = 'none';
     }
   }
-  BlocklyInterface.workspace.clear();
+  // BlocklyInterface.workspace.clear();
   var background = document.getElementById('background');
   var pegmanIcon = document.getElementById('pegman');
   document.getElementById('bridge').style.display = 'none';
@@ -1158,7 +1158,7 @@ Bridge.reset = function(first) {
   // document.getElementById('runButton').style.display = 'none';
   // document.getElementById('resetButton').style.display = 'none';
   Bridge.pidList = [];
-  // Bridge.prevlog.clear();
+  Bridge.prevlog.clear();
   // Move Pegman into position.
   Bridge.drawclone = true;
   Bridge.pegmanX = Bridge.bridge1_.x;
@@ -1607,7 +1607,7 @@ Bridge.execute = function() {
 /**
  * Iterate through the recorded path and animate pegman's actions.
  */
-// Bridge.prevlog = new Set();
+Bridge.prevlog = new Set();
 Bridge.animate = function() {
   var action = Bridge.log.shift();
   if (!action) {
@@ -1615,8 +1615,8 @@ Bridge.animate = function() {
     // Bridge.levelHelp();
     return;
   }
-
-  // if(!Bridge.prevlog.has(action[1])){
+  // alert(action);
+  if(!Bridge.prevlog.has(action[1])) {
     BlocklyInterface.highlight(action[1]);
     // console.log(action[0]+',' +action[1]);
     switch (action[0]) {
@@ -1757,10 +1757,14 @@ Bridge.animate = function() {
         Bridge.questionsquiz();
         // BlocklyInterface.saveToLocalStorage();
       }
-      // Bridge.prevlog.add(action[1]);
-  // }
+      if(Bridge.log[0] == null || Bridge.log[0][1] != action[1])
+        Bridge.prevlog.add(action[1]);
+      var factor = Bridge.timevalue;
+  }
+  else {
+    var factor = 1;
+  }
   // console.log(Bridge.prevlog);
-  var factor = Bridge.timevalue;
   Bridge.pidList.push(setTimeout(Bridge.animate, Bridge.stepSpeed * factor));
   if(Bridge.Finishtimes == 1 && Bridge.log.length == 0 && !Bridge.shiftdone){
     //reorder the canvas
@@ -2306,8 +2310,8 @@ Bridge.constrainDirection16 = function(d) {
  * @throws {false} If Pegman collides with a wall.
  */
 Bridge.move = function(direction, id) {
-  // if(!Bridge.prevlog.has(id))
-  // {
+  if(!Bridge.prevlog.has(id))
+  {
     if (!Bridge.isPath(direction, null)) {
       Bridge.log.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
       throw false;
@@ -2353,8 +2357,8 @@ Bridge.move = function(direction, id) {
         command = 'northwest';
         break;
     }
-  // }
-  Bridge.log.push([command, id]);
+    Bridge.log.push([command, id]);
+  }
 };
 
 /**
@@ -2363,6 +2367,8 @@ Bridge.move = function(direction, id) {
  * @param {string} id ID of block that triggered this action.
  */
 Bridge.turn = function(direction, id) {
+  if(!Bridge.prevlog.has(id))
+  {
     switch (direction)
     {
       case 0:
@@ -2398,7 +2404,7 @@ Bridge.turn = function(direction, id) {
         Bridge.log.push(['NorthWest',id]);
         break;
     }
-  // }
+  }
   Bridge.pegmanDcheck = Bridge.constrainDirection4(Bridge.pegmanDcheck);
 };
 Bridge.swim = function(degree, id){
@@ -2419,8 +2425,8 @@ Bridge.dive = function(id) {
  * @return {boolean} True if there is a path.
  */
 Bridge.isPath = function(direction, id) {
-  // if(!Bridge.prevlog.has(id))
-  // {
+  if(!Bridge.prevlog.has(id))
+  {
     var effectiveDirection = Bridge.pegmanDcheck + direction;
     var square;
     var command;
@@ -2464,7 +2470,7 @@ Bridge.isPath = function(direction, id) {
         command = 'look_northwest';
         break;
     }
-  // }
+  }
   if (id) {
     Bridge.log.push([command, id]);
   }
@@ -2544,8 +2550,8 @@ Bridge.questionsquiz = function(val) {
   // cancel.addEventListener('touchend', BlocklyDialogs.checkinput, val);
   var ok = document.getElementById('doneOk1');
   ok.style.display = "none";
-  ok.addEventListener('click', BlocklyInterface.nextLevel, true);
-  ok.addEventListener('touchend', BlocklyInterface.nextLevel, true);
+  ok.addEventListener('click', BlocklyDialogs.congratulations, true);
+  ok.addEventListener('touchend', BlocklyDialogs.congratulations, true);
 
   BlocklyDialogs.showDialog(content, null, false, true, style,
       function() {
