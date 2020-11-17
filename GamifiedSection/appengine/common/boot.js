@@ -11,10 +11,10 @@
 'use strict';
 
 // Redirect to new domain.
-if (location.host == 'blockly-games.appspot.com') {
-  location.replace('https://blockly.games' +
-      location.pathname + location.search + location.hash);
-}
+// if (location.host == 'blockly-games.appspot.com') {
+//   location.replace('https://blockly.games' +
+//       location.pathname + location.search + location.hash);
+// }
 
 (function() {
   // Application path.
