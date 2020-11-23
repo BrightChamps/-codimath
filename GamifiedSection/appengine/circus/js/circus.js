@@ -74,6 +74,7 @@ Circus.init = function() {
   var visualization = document.getElementById('visualization');
   Circus.WIDTH = 1200 * BlocklyGames.factor;
   Circus.HEIGHT = 1000 * BlocklyGames.factor;
+  Circus.renderSuppourts_();
   var containerdiv = document.getElementById('Container');
   var onresize = function(e) {
     var top = visualization.offsetTop;
@@ -129,19 +130,11 @@ Circus.init = function() {
 
   // Circus.renderHatching_();
   // Render the frame zero answer because we need it right now.
-  Circus.renderAnswer_(0);
-  // // Remaining answers may be computed later without slowing down page load.
-  function renderRemainingAnswers() {
-    for (var f = 1; f <= Circus.FRAMES; f++) {
-      Circus.renderAnswer_(f);
-    }
-  }
-  setTimeout(renderRemainingAnswers, 1);
   Circus.renderAxies_();
-  Circus.renderSuppourts_();
   Circus.codeChange();
   BlocklyInterface.workspace.addChangeListener(Circus.codeChange);
   Circus.display();
+  Circus.renderSuppourts_();
   Circus.rideranimationvalue = true;
   Circus.riderrotation = true;
 
