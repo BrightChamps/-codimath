@@ -67,7 +67,18 @@ Circus.init = function() {
        level: BlocklyGames.LEVEL,
        maxLevel: BlocklyGames.MAX_LEVEL,
        html: BlocklyGames.IS_HTML});
-
+   var ctx1 = document.getElementById('support1').getContext('2d');
+   var ctx2 = document.getElementById('support2').getContext('2d');
+   var ctx3 = document.getElementById('support3').getContext('2d');
+   var ctx4 = document.getElementById('support4').getContext('2d');
+   var ctx5 = document.getElementById('support5').getContext('2d');
+   var image = new Image();
+   image.src = 'circus/GlowRedFinal.png';
+   ctx1.drawImage(image, 0, 0, 40, 40, 0, 0, ctx1.canvas.width , ctx1.canvas.height );
+   ctx2.drawImage(image, 0, 0, 40, 40, 0, 0, ctx2.canvas.width , ctx2.canvas.height );
+   ctx3.drawImage(image, 0, 0, 40, 40, 0, 0, ctx3.canvas.width , ctx3.canvas.height );
+   ctx4.drawImage(image, 0, 0, 40, 40, 0, 0, ctx4.canvas.width , ctx4.canvas.height );
+   ctx5.drawImage(image, 0, 0, 40, 40, 0, 0, ctx5.canvas.width , ctx5.canvas.height );
   BlocklyInterface.init();
   var rtl = BlocklyGames.isRtl();
   var blocklyDiv = document.getElementById('blockly');
