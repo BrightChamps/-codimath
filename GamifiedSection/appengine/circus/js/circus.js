@@ -141,6 +141,14 @@ Circus.init = function() {
 
   // Circus.renderHatching_();
   // Render the frame zero answer because we need it right now.
+  Circus.renderAnswer_(0);
+ // // Remaining answers may be computed later without slowing down page load.
+ function renderRemainingAnswers() {
+   for (var f = 1; f <= Circus.FRAMES; f++) {
+     Circus.renderAnswer_(f);
+   }
+ }
+ setTimeout(renderRemainingAnswers, 1);
   Circus.renderAxies_();
   Circus.codeChange();
   BlocklyInterface.workspace.addChangeListener(Circus.codeChange);
