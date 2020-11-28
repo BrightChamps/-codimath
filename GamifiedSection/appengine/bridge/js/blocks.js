@@ -177,7 +177,7 @@ Blockly.JavaScript['bridge_loop'] = function(block) {
     branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
         '\'block_id_' + block.id + '\' times' + times +'\'') + branch;
   }
-  return 'for(var i=0; i<' + times +';i++) {\n' + branch + '}\n';
+  return 'for(var i = 1; i <= ' + times +'; i++) {\n' + branch + '}\n';
 };
 
 Blockly.Blocks['bridge_swim'] = {

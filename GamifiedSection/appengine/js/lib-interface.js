@@ -85,15 +85,21 @@ BlocklyInterface.init = function() {
     case 'bridge':
       BlocklyInterface.currentpage = 3;
       break;
-    case 'mazeangle':
+    case 'ocean':
       BlocklyInterface.currentpage = 4;
       break;
-    case 'maze':
+    case 'mazeangle':
       BlocklyInterface.currentpage = 5;
       break;
-    case 'door':
+    // case 'mazeperimeter':
+    //   BlocklyInterface.currentpage = 6;
+    //   break;
+    case 'maze':
       BlocklyInterface.currentpage = 6;
       break;
+    // case 'door':
+    //   BlocklyInterface.currentpage = 7;
+    //   break;
   }
 };
 
@@ -248,7 +254,7 @@ BlocklyInterface.saveToLocalStorage = function() {
 /**
  * Go to the index page.
  */
-BlocklyInterface.pages = ['start.html','circus.html','bridge.html','mazeangle.html','maze.html','door.html','ocean.html','mazeperimeter.html','findfriend.html','gamefinsihed.html'];
+BlocklyInterface.pages = ['start.html','circus.html','bridge.html','ocean.html','mazeangle.html','maze.html','gamefinsihed.html','mazeperimeter.html','findfriend.html','door.html'];
 BlocklyInterface.indexPage = function() {
   window.location = (BlocklyGames.IS_HTML ? 'index.html' : './') +
       '?lang=' + BlocklyGames.LANG;

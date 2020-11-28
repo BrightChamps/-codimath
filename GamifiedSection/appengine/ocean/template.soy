@@ -1,0 +1,339 @@
+{namespace Ocean.soy}
+
+/**
+ * This is a Closure Template.
+ *
+ * To regenerate just English, run:
+ *   make ocean-en
+ *
+ * To regenerate all languages, run:
+ *   make languages
+ */
+
+/**
+ * Translated messages for use in JavaScript.
+ */
+{template .messages}
+  {call BlocklyGames.soy.messages /}
+  <div style="display: none">
+    <span id="Ocean_x">{msg meaning="Ocean.x" desc="Label for an x-coordinate (horizontal) input."}x{/msg}</span>
+    <span id="Ocean_y">{msg meaning="Ocean.y" desc="Label for a y-coordinate (vertical) input."}y{/msg}</span>
+    <span id="Ocean_width">{{msg meaning="Ocean.width" desc="Label for a rectangle or line's width input.\n{lb}{lb}Identical|Width{rb}{rb}"}}width{{/msg}}</span>
+    <span id="Ocean_height">{{msg meaning="Ocean.height" desc="Label for a rectangle's height input.\n{lb}{lb}Identical|Height{rb}{rb}"}}height{{/msg}}</span>
+    <span id="Ocean_rectTooltip">{msg meaning="Ocean.rectTooltip" desc="tooltip"}Draws a rectangle at the specified location and with the specified width and height.{/msg}</span>
+    <span id="ocean_cutTooltip">{msg meaning="Ocean.rectTooltip" desc="tooltip"}Cuts a piece of paper/cloth along the diagonal.{/msg}</span>
+    <span id="ocean_sailTooltip">{msg meaning="Ocean.rectTooltip" desc="tooltip"}To sail the yatch in the ocean.{/msg}</span>
+    <span id="Ocean_rectDraw">{{msg meaning="Ocean.rectDraw" desc="Command to draw a rectangle.\n{lb}{lb}Identical|Rectangle{rb}{rb}"}}rectangle{{/msg}}</span>
+    <span id="Ocean_moveForward">{msg meaning="Ocean.moveForward" desc="block text - Imperative or infinitive of a verb for a person moving (walking) in the direction he/she is facing."}move forward{/msg}</span>
+    <span id="Ocean_turnNorth">{msg meaning="Ocean.turnNorth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North.  Prefer a translation that has text in common with the translation of 'turn North'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North{/msg}</span>
+    <span id="Ocean_turnNorthEast">{msg meaning="Ocean.turnNorthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North East.  Prefer a translation that has text in common with the translation of 'turn North-East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North-East{/msg}</span>
+    <span id="Ocean_swimTooltip">{msg meaning="Ocean.swimTooltip" desc="Tooltip for the block that allows players to move."}Swim forward. Specify a direction (0-360).{/msg}</span>
+    <span id="ocean_driftbackTooltip">{msg meaning="Ocean.driftbackTooltip" desc="Tooltip for the block that allows players to drift back to the original path."}Drift yatch back to the original path.{/msg}</span>
+    <span id="ocean_driftTooltip">{msg meaning="Ocean.driftTooltip" desc="Tooltip for the block that allows players to drift back to the specified direction ."}Drift yatch to left or right.{/msg}</span>
+    <span id="Ocean_turnEast">{msg meaning="Ocean.turnEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body East.  Prefer a translation that has text in common with the translation of 'turn East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn East{/msg}</span>
+    <span id="Ocean_turnSouthEast">{msg meaning="Ocean.turnSouthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South East.  Prefer a translation that has text in common with the translation of 'turn South-East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South-East{/msg}</span>
+    <span id="Ocean_turnSouth">{msg meaning="Ocean.turnSouth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South.  Prefer a translation that has text in common with the translation of 'turn South'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South{/msg}</span>
+    <span id="Ocean_turnSouthWest">{msg meaning="Ocean.turnSouthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South West.  Prefer a translation that has text in common with the translation of 'turn South-West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South-West{/msg}</span>
+    <span id="Ocean_turnWest">{msg meaning="Ocean.turnWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body West.  Prefer a translation that has text in common with the translation of 'turn West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn West{/msg}</span>
+    <span id="Ocean_turnNorthWest">{msg meaning="Ocean.turnNorthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North West.  Prefer a translation that has text in common with the translation of 'turn North-West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North-West{/msg}</span>
+    <span id="Ocean_driftright">{msg meaning="Ocean.driftRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person drifting his yatch right.  Prefer a translation that has text in common with the translation of 'drift Right'.  See [[Translating:Blockly#Drop-Down_Menus]]."}Drift Right{/msg}</span>
+    <span id="Ocean_driftleft">{msg meaning="Ocean.driftLeft" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person drifting his yatch left.  Prefer a translation that has text in common with the translation of 'drift Left'.  See [[Translating:Blockly#Drop-Down_Menus]]."}Drift Left{/msg}</span>
+    <span id="Ocean_doCode">{{msg meaning="Ocean.doCode" desc="block text - Imperative or infinitive of a verb preceding one or more commands to a person.  This is part of [https://github.com/google/blockly/wiki/Loops#repeat repeat] and [https://github.com/google/blockly/wiki/IfElse#If_blocks if] blocks.\n{lb}{lb}Identical|Do{rb}{rb}"}}do{{/msg}}</span>
+    <span id="Ocean_elseCode">{{msg meaning="Ocean.elseCode" desc="block text - Conjunction meaning 'otherwise', introducing commands to be performed if a previous condition was not true, as in 'if x>3, do this, else do that'.  See [https://github.com/google/blockly/wiki/IfElse#If-Else_blocks].\n{lb}{lb}Identical|Else{rb}{rb}"}}else{{/msg}}</span>
+    // The helpIfElse definition was copied up here ahead of when it is needed
+    // so that it is adjacent to the previous definition.
+    <span id="Ocean_helpIfElse">{msg meaning="Ocean.helpIfElse" desc="callout - This is shown when the 'if-else' block is introduced.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}</span>
+    <span id="Ocean_pathAhead">{msg meaning="Ocean.pathAhead" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path ahead', as in: 'if path ahead, go forward'.  Prefer translation that has text in common with 'if path to the left' and 'if path to the right'."}if path ahead{/msg}</span>
+    <span id="Ocean_pathNorth">{msg meaning="Ocean.pathNorth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North', as in: 'if path to the North, turn North'."}if path to the North{/msg}</span>
+    <span id="Ocean_pathNorthEast">{msg meaning="Ocean.pathNorthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North-East', as in: 'if path to the North-East, turn North-East'."}if path to the North-East{/msg}</span>
+    <span id="Ocean_pathEast">{msg meaning="Ocean.pathEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the East', as in: 'if path to the East, turn East'."}if path to the East{/msg}</span>
+    <span id="Ocean_pathSouthEast">{msg meaning="Ocean.pathSouthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South-East', as in: 'if path to the South-East, turn South-East'."}if path to the South-East{/msg}</span>
+    <span id="Ocean_pathSouth">{msg meaning="Ocean.pathSouth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South', as in: 'if path to the South, turn South'."}if path to the South{/msg}</span>
+    <span id="Ocean_pathSouthWest">{msg meaning="Ocean.pathSouthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South-West', as in: 'if path to the South-West, turn South-West'."}if path to the South-West{/msg}</span>
+    <span id="Ocean_pathWest">{msg meaning="Ocean.pathWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the West', as in: 'if path to the West, turn West'."}if path to the West{/msg}</span>
+    <span id="Ocean_pathNorthWest">{msg meaning="Ocean.pathNorthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North-West', as in: 'if path to the North-West, turn North-West'."}if path to the North-West{/msg}</span>
+    <span id="Ocean_repeat">{msg meaning="Ocean.repeat" desc="block text - Imperative or infinitive of a verb to repeat the following commands.  The phrase is followed by the symbol denoting the end of the Ocean."}repeat until{/msg}</span>
+    <span id="Ocean_repeatfor">{msg meaning="Ocean.repeat" desc="block text - Imperative or infinitive of a verb to repeat the following commands.  The phrase is followed by the symbol denoting the end of the Ocean."}repeat{/msg}</span>
+    <span id="Ocean_moveForwardTooltip">{msg meaning="Ocean.moveForwardTooltip" desc="tooltip - Moves the icon on the screen representing the player forward one square on the Ocean board."}Moves the player forward one space.{/msg}</span>
+    <span id="Ocean_turnTooltip">{msg meaning="Ocean.turnTooltip" desc="tooltip - Turns the icon on the screen representing the player 90 degrees counter-clockwise (left) or clockwise (right)."}Turns the player in the direction as in a Compass.{/msg}</span>
+    <span id="Ocean_ifTooltip">{msg meaning="Ocean.ifTooltip" desc="tooltip - 'path' refers to a path through a Ocean."}If there is a path in the specified direction, then do some actions.{/msg}</span>
+    <span id="Ocean_ifelseTooltip">{msg meaning="Ocean.ifelseTooltip" desc="tooltip - 'path' refers to a path through a Ocean."}If there's a rock in the path of the yatch do first block of actions, else do second block of actions.{/msg}</span>
+    <span id="Ocean_whileTooltip">{msg meaning="Ocean.whileTooltip" desc="tooltip - Repeat the enclosed commands until the island has been successfully reached (the end point reached)."}Repeat the enclosed actions until you reach the island.{/msg}</span>
+    <span id="Ocean_loopTooltip">{msg meaning="Ocean.whileTooltip" desc="tooltip - Repeat the enclosed commands until specified number of times."}Repeat the enclosed actions a specified number of times.{/msg}</span>
+    <span id="Ocean_capacity0">{msg meaning="Ocean.capacity0" desc="warning - No more blocks may be added until some are removed.  Please include '%0' in the translated string.  It will be replaced with '0' and made bold."}You have %0 blocks left.{/msg}</span>
+    <span id="Ocean_capacity1">{{msg meaning="Ocean.capacity1" desc="warning - Only one more block may be added. Please include '%1' in the translated string. It will be replaced with '1' and made bold.\n\nSee also:\n* {lb}{lb}msg-blockly|Ocean.capacity2{rb}{rb}"}}You have %1 block left.{{/msg}}</span>
+    <span id="Ocean_capacity2">{{msg meaning="Ocean.capacity2" desc="warning - Only %2 more blocks may be used, where %2 is an integer greater than 1.\n\nSee also:\n* {lb}{lb}msg-blockly|Ocean.capacity1{rb}{rb}"}}You have %2 blocks left.{{/msg}}</span>
+    <span id="Ocean_pathLeft">{msg meaning="Ocean.pathLeft" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if river direction is East to West', as in: 'if river direction is East to West use positive angle'."}East to West{/msg}</span>
+    <span id="Ocean_pathRight">{msg meaning="Ocean.pathRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if river direction is West to East', as in: 'if river direction is West to East use negative angle'."}West to East{/msg}</span>
+  </div>
+{/template}
+
+/**
+ * Web page structure.
+ */
+{template .ocean}
+  {call .messages /}
+  {call BlocklyGames.soy.headerBar}
+    {param appName}
+      {msg meaning="Games.ocean" desc="IBID"}Ocean{/msg}
+    {/param}
+    {param levelLinkSuffix}skin={$ij.skin}{/param}
+    {param hasLinkButton: false /}
+    {param hasHelpButton: true /}
+    {param farLeftHtml}
+      <button id="pegmanButton" style="display :none">
+        <img src="common/1x1.gif">
+        <span id="pegmanButtonArrow"></span>
+      </button>
+    {/param}
+  {/call}
+
+  <div id="visualization">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgOcean" width="1200px" height="1000px">
+    <g id="look">
+      <path d="M 0,-15 a 15 15 0 0 1 15 15" />
+      <path d="M 0,-35 a 35 35 0 0 1 35 35" />
+      <path d="M 0,-55 a 55 55 0 0 1 55 55" />
+    </g>
+    </svg>
+    <div id="capacityBubble">
+      <div id="capacity"></div>
+    </div>
+    <div id="oceananimationdiv" width="1200" height="1000" >
+    <div id="coordinates">
+      <span id="x"></span>
+      <span id="y"></span>
+    </div>
+    <video id="video" src="ocean/E.mp4" style="display:none"></video>
+    <video id="video2" src="ocean/walking.mp4" style="display:none"></video>
+    <canvas id="axies" width="1200" height="1000" style="display: none" dir="ltr"></canvas>
+    <canvas id="canvasOcean" width="1200px" height="1000px"></canvas>
+    </div>
+  </div>
+
+  <table id="buttontable" width="500px">
+    <tr>
+      <td style="text-align : centre">
+        <button id="runButton" class="primary"title="{msg meaning="Ocean.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the player through the Ocean."}Makes the player do what the blocks say.{/msg}">
+          <img src="common/1x1.gif" class="run icon21"> {msg meaning="Games.runProgram" desc="IBID"}Run Program{/msg}
+        </button>
+        <button id="resetButton"  class="primary"title="{msg meaning="Ocean.resetTooltip" desc="tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again."}Put the player back at the start of the level.{/msg}">
+          <img src="common/1x1.gif" class="stop icon21"> {msg meaning="Games.resetProgram" desc="IBID"}Restart{/msg}
+        </button>
+        <button id="resetOceanButton"  class="primary"title="{msg meaning="Ocean.resetOceanTooltip" desc="tooltip - Pressing this button restores the player to the start of the broken ocean and enables the user's program to be run again."}Put the player back at the start of the broken ocean.{/msg}">
+          <img src="common/1x1.gif" class="stop icon21"> {msg meaning="Games.resetProgram" desc="IBID"}Reset{/msg}
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  {call .toolbox /}
+  <div id="blockly"></div>
+  <div id="pegmanMenu"></div>
+
+  {call BlocklyGames.soy.dialog /}
+  {call BlocklyGames.soy.doneDialog /}
+  {call BlocklyGames.soy.abortDialog /}
+  {call BlocklyGames.soy.storageDialog /}
+
+  <div id="help" class="dialogHiddenContent">
+    <div id="helptext" style="padding-bottom: 0.7ex">
+        {msg meaning="Ocean.helpText1" desc="Instructions."}
+          Move to the table you see on the beach.
+        {/msg}
+    </div>
+    {call BlocklyGames.soy.ok /}
+  </div>
+
+  <div id="Quiz" class="dialogHiddenContent">
+    <div id="dialogLinesText1" style="font-size: large; margin: 1em;"></div>
+    <input type = "text" id="containerCode1"></input>
+    <br>
+    <br>
+    <div id="dialogDoneText1" style="font-size: large; margin: 1em;"></div>
+    <div id="dialogDoneButtons1" class="farSide" style="padding: 1ex 3ex 0">
+      <button id="doneSubmit1">
+        {{msg meaning="Games.dialogCancel" desc="IBID"}}Submit{{/msg}}
+      </button>
+      <button id="doneOk1" class="secondary">
+        {{msg meaning="Games.dialogOk" desc="IBID"}}OK{{/msg}}
+      </button>
+    </div>
+  </div>
+
+  {if $ij.level == 1}
+    <div id="dialogHelpStack" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="common/help.png">
+      </td><td>&nbsp;</td><td>
+        {msg meaning="Ocean.helpStack" desc="callout - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+      </td><td valign="top">
+        <img src="ocean/help_stack.png" class="mirrorImg" height=63 width=136>
+      </td></tr></table>
+    </div>
+    <div id="dialogHelpOneTopBlock" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="common/help.png">
+      </td><td>&nbsp;</td><td>
+        {msg meaning=".helpOneTopBlock" desc="callout - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}
+        <div id="sampleOneTopBlock" class="readonly"></div>
+      </td></tr></table>
+    </div>
+    <div id="dialogHelpRun" class="dialogHiddenContent">
+      <table><tr><td>
+        {msg meaning=".helpRun" desc="callout - This is shown after the user has created a program on the first level."}Run your program to see what happens.{/msg}
+      </td><td rowspan=2>
+        <img src="common/help.png">
+      </td></tr><tr><td>
+        <div><img src="ocean/help_run.png" class="mirrorImg" height=27 width=141></div>
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 2}
+    <div id="dialogHelpReset" class="dialogHiddenContent">
+      <table><tr><td>
+        {msg meaning=".helpReset" desc="callout - This is shown after the user has run a program that does not solve the ocean."}Your program didn't solve the ocean. Press 'Reset' and try again.{/msg}
+      </td><td rowspan=2>
+        <img src="common/help.png">
+      </td></tr><tr><td>
+        <div><img src="ocean/help_run.png" class="mirrorImg" height=27 width=141></div>
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 3 or $ij.level == 4}
+    {if $ij.level == 3}
+      <div id="dialogHelpRepeat" class="dialogHiddenContent">
+        <table><tr><td>
+          <img src="ocean/help_up.png">
+        </td><td>
+          {msg meaning="Ocean.helpRepeat" desc="callout - This is shown when the 'repeat' block is introduced.  The word 'path' refers to a path through a ocean, and 'block' refers to a child's building block."}Reach the end of this path using only two blocks. Use 'repeat' to run a block more than once.{/msg}
+        </td><td>
+          <img src="common/help.png">
+        </td></tr></table>
+      </div>
+    {/if}
+    <div id="dialogHelpCapacity" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="common/help.png">
+      </td><td>&nbsp;</td><td>
+        {msg meaning="Ocean.helpCapacity" desc="callout - This is shown after the user has used all the blocks permitted on this level."}You have used up all the blocks for this level. To create a new block, you first need to delete an existing block.{/msg}
+      </td></tr></table>
+    </div>
+    <div id="dialogHelpRepeatMany" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="ocean/help_up.png">
+      </td><td>
+        {msg meaning="Ocean.helpRepeatMany" desc="callout - This is a hint that the user should place a second block inside of a a 'repeat' block."}You can fit more than one block inside a 'repeat' block.{/msg}
+      </td><td>
+        <img src="common/help.png">
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 5}
+    <div id="dialogHelpSkins" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="common/help.png">
+      </td><td width="95%">
+        {{msg meaning="Ocean.helpSkins" desc="callout - This is a hint that the user can change the appearance of the player that moves within the ocean."}}Choose your favourite player from this menu.{{/msg}}
+      </td><td>
+        <img src="ocean/help_up.png">
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 6}
+    <div id="dialogHelpIf" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="ocean/help_up.png">
+      </td><td>
+        {msg meaning="Ocean.helpIf" desc="callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true. Try turning left if there is a path to the left.{/msg}
+      </td><td>
+        <img src="common/help.png">
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 7}
+    <div id="dialogHelpMenu" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="ocean/help_up.png">
+      </td><td id="helpMenuText">
+        {msg meaning="Ocean.helpMenu" desc="callout - %1 will be replaced with an image of the dropdown menu that the user needs to click."}Click on %1 in the 'if' block to change its condition.{/msg}
+      </td><td>
+        <img src="common/help.png">
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 9}
+    <div id="dialogHelpIfElse" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="ocean/help_down.png">
+      </td><td>
+        {msg meaning="Ocean.helpIfElse" desc="IBID"}
+          If-else blocks will do one thing or the other.
+        {/msg}
+      </td><td>
+        <img src="common/help.png">
+      </td></tr></table>
+    </div>
+  {elseif $ij.level == 10}
+    <div id="dialogHelpWallFollow" class="dialogHiddenContent">
+      <table><tr><td>
+        <img src="common/help.png">
+      </td><td>&nbsp;</td><td>
+        {msg meaning="Ocean.helpWallFollow" desc="callout - This advises the user to solve a ocean by keeping his/her left hand in contact with the wall while proceeding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}
+          Can you solve this complicated ocean? Try following the left-hand wall. Advanced programmers only!
+        {/msg}
+        {call BlocklyGames.soy.ok /}
+      </td></tr></table>
+    </div>
+  {/if}
+{/template}
+
+/**
+ * Toolboxes for each level.
+ */
+{template .toolbox}
+  <xml id="toolbox" xmlns="https://developers.google.com/blockly/xml">
+    <category name="{msg meaning="Games.ocean" desc="IBID"}Movement{/msg}">
+      <block type="ocean_moveForward"></block>
+      <block type="ocean_turn"><field name="DIR">turnNorth</field></block>
+    </category>
+    <category name="{msg meaning="Games.ocean" desc="IBID"}Draw{/msg}">
+    <block type="ocean_rect">
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="WIDTH">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="HEIGHT">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="ocean_cut"></block>
+    </category>
+    <category name="{msg meaning="Games.ocean" desc="IBID"}Ocean{/msg}">
+      <block type="ocean_sail"></block>
+      <block type="ocean_drift"><field name="DIR">driftRight</field></block>
+      <block type="ocean_driftback"></block>
+    </category>
+    <category name="{msg meaning="Games.catLoops" desc="IBID"}Loops{/msg}">
+      <block type="ocean_loop">
+        <value name="times">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ocean_forever">
+      </block>
+    </category>
+    <category name="{msg meaning="Games.catLogic" desc="IBID"}Logic{/msg}">
+      <block type="ocean_ifElse"></block>
+    </category>
+  </xml>
+{/template}

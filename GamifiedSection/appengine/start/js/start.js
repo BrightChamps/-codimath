@@ -714,9 +714,7 @@ Start.boyenteringcircus = function() {
   var x = 4 * Start.SQUARE_SIZE;
   var y = 6 * Start.SQUARE_SIZE;
   BlocklyDialogs.hideDialog(true);
-  setTimeout(function() {
-    BlocklyDialogs.congratulations();
-  }, 8000);
+  setTimeout(BlocklyInterface.nextLevel,8000);
   document.getElementById('buttontable').style.display = 'none';
   document.getElementById('blockly').style.display = 'none';
   document.getElementById('svgStart').style.display = 'none';
@@ -2474,16 +2472,16 @@ var text = "Sorry you entered wrong answer please try again!"
   // cancel.addEventListener('touchend', BlocklyDialogs.checkinput, val);
   var ok = document.getElementById('doneOk1');
   ok.style.display = "none";
-  ok.addEventListener('click', BlocklyDialogs.congratulations, true);
-  ok.addEventListener('touchend', BlocklyDialogs.congratulations, true);
+  ok.addEventListener('click', Start.congratulations, true);
+  ok.addEventListener('touchend', Start.congratulations, true);
 
   BlocklyDialogs.showDialog(content, null, false, true, style,
       function() {
         document.body.removeEventListener('keydown',
-            Start.congratulationsKeyDown, true);
+            Start.congratulationsKeyDown1, true);
         });
   document.body.addEventListener('keydown',
-      Start.congratulationsKeyDown, true);
+      Start.congratulationsKeyDown1, true);
   document.getElementById('dialogDoneText1').style.display = "none";
   document.getElementById('dialogDoneText1').textContent = text;
 };
@@ -2500,7 +2498,7 @@ Start.checkinput = function(){
     document.getElementById('dialogDoneText1').style.display = "initial";
   }
 }
-Start.congratulationsKeyDown = function(e) {
+Start.congratulationsKeyDown1 = function(e) {
   if (e.keyCode == 13 ||
       e.keyCode == 27 ||
       e.keyCode == 32) {
@@ -2512,6 +2510,74 @@ Start.congratulationsKeyDown = function(e) {
     //     BlocklyInterface.nextLevel();
     //   }, Start.stepSpeed * (Start.timevalue + 6000));
     // }
+  }
+};
+
+Start.congratulations = function() {
+  var content = document.getElementById('dialogDone');
+  var style = {
+    width: '40%',
+    left: '30%',
+    top: '3em'
+  };
+
+  // Add the user's code.
+  if (BlocklyInterface.workspace) {
+    var linesText = document.getElementById('dialogLinesText');
+    linesText.textContent = '';
+    var code = BlocklyInterface.executedJsCode;
+    code = BlocklyInterface.stripCode(code);
+    var noComments = code.replace(/\/\/[^\n]*/g, '');  // Inline comments.
+    noComments = noComments.replace(/\/\*.*\*\//g, '');  /* Block comments. */
+    noComments = noComments.replace(/[ \t]+\n/g, '\n');  // Trailing spaces.
+    noComments = noComments.replace(/\n+/g, '\n');  // Blank lines.
+    noComments = noComments.trim();
+    var lineCount = noComments.split('\n').length;
+    var pre = document.getElementById('containerCode');
+    pre.textContent = code;
+    if (typeof prettyPrintOne == 'function') {
+      code = pre.innerHTML;
+      code = prettyPrintOne(code, 'js');
+      pre.innerHTML = code;
+    }
+    if (lineCount == 1) {
+      var text = BlocklyGames.getMsg('Games_linesOfCode1');
+    } else {
+      var text = BlocklyGames.getMsg('Games_linesOfCode2')
+          .replace('%1', String(lineCount));
+    }
+    linesText.appendChild(document.createTextNode(text));
+  }
+
+  var text = 'Are you ready for next level?';
+  // var cancel = document.getElementById('doneCancel');
+  // cancel.addEventListener('click', BlocklyDialogs.hideDialog, true);
+  // cancel.addEventListener('touchend', BlocklyDialogs.hideDialog, true);
+  var ok = document.getElementById('doneOk');
+  ok.addEventListener('click', Start.boyenteringcircus, true);
+  ok.addEventListener('touchend', Start.boyenteringcircus, true);
+
+  BlocklyDialogs.showDialog(content, null, false, true, style,
+      function() {
+        document.body.removeEventListener('keydown',
+            Start.congratulationsKeyDown, true);
+        });
+  document.body.addEventListener('keydown',
+      Start.congratulationsKeyDown, true);
+
+  document.getElementById('dialogDoneText').textContent = text;
+};
+
+Start.congratulationsKeyDown = function(e) {
+  if (e.keyCode == 13 ||
+      e.keyCode == 27 ||
+      e.keyCode == 32) {
+    // BlocklyDialogs.hideDialog(true);
+    e.stopPropagation();
+    e.preventDefault();
+    if (e.keyCode != 27) {
+      Start.boyenteringcircus();
+    }
   }
 };
 

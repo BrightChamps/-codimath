@@ -2,9 +2,9 @@
 # Definitions
 ##############################
 
-USER_APPS = {index,puzzle,maze,mazeangle,start,circus,bridge,door,bird,turtle,movie,music,pond/docs,pond/tutor,pond/duck,gallery}
-ALL_JSON = {./,index,puzzle,maze,mazeangle,start,circus,bridge,door,bird,turtle,movie,music,pond/docs,pond,pond/tutor,pond/duck,gallery}
-ALL_TEMPLATES = appengine/template.soy,appengine/index/template.soy,appengine/puzzle/template.soy,appengine/maze/template.soy,appengine/puzzle/template.soy,appengine/mazeangle/template.soy,appengine/start/template.soy,appengine/circus/template.soy,appengine/bridge/template.soy,appengine/door/template.soy,appengine/bird/template.soy,appengine/turtle/template.soy,appengine/movie/template.soy,appengine/music/template.soy,appengine/pond/docs/template.soy,appengine/pond/template.soy,appengine/pond/tutor/template.soy,appengine/pond/duck/template.soy,appengine/gallery/template.soy
+USER_APPS = {index,puzzle,maze,mazeangle,start,circus,bridge,ocean,door,bird,turtle,movie,music,pond/docs,pond/tutor,pond/duck,gallery}
+ALL_JSON = {./,index,puzzle,maze,mazeangle,start,circus,bridge,ocean,door,bird,turtle,movie,music,pond/docs,pond,pond/tutor,pond/duck,gallery}
+ALL_TEMPLATES = appengine/template.soy,appengine/index/template.soy,appengine/puzzle/template.soy,appengine/maze/template.soy,appengine/puzzle/template.soy,appengine/mazeangle/template.soy,appengine/start/template.soy,appengine/circus/template.soy,appengine/bridge/template.soy,appengine/door/template.soy,appengine/ocean/template.soy,appengine/door/template.soy,appengine/bird/template.soy,appengine/turtle/template.soy,appengine/movie/template.soy,appengine/music/template.soy,appengine/pond/docs/template.soy,appengine/pond/template.soy,appengine/pond/tutor/template.soy,appengine/pond/duck/template.soy,appengine/gallery/template.soy
 
 APP_ENGINE_THIRD_PARTY = appengine/third-party
 SOY_COMPILER = java -jar third-party-downloads/SoyToJsSrcCompiler.jar --shouldProvideRequireSoyNamespaces --isUsingIjData
@@ -58,6 +58,10 @@ door-en: common-en
 	$(SOY_COMPILER) --outputPathFormat appengine/door/generated/en/soy.js --srcs appengine/door/template.soy
 	python build-app.py door en
 
+ocean-en: common-en
+	$(SOY_COMPILER) --outputPathFormat appengine/ocean/generated/en/soy.js --srcs appengine/ocean/template.soy
+	python build-app.py ocean en
+
 circus-en: common-en
 		$(SOY_COMPILER) --outputPathFormat appengine/circus/generated/en/soy.js --srcs appengine/circus/template.soy
 		python build-app.py circus en
@@ -93,9 +97,9 @@ pond-common-en: common-en
 common-en:
 	$(SOY_COMPILER) --outputPathFormat appengine/generated/en/soy.js --srcs appengine/template.soy
 
-en: index-en puzzle-en maze-en mazeangle-en start-en circus-en bridge-en door-en bird-en turtle-en movie-en music-en pond-docs-en pond-tutor-en pond-duck-en genetics-en gallery-en
+en: index-en puzzle-en maze-en mazeangle-en start-en circus-en bridge-en door-en bird-en ocean-en turtle-en movie-en music-en pond-docs-en pond-tutor-en pond-duck-en genetics-en gallery-en
 
-index puzzle maze mazeangle start circus bridge door bird turtle movie music gallery: common
+index puzzle maze mazeangle start circus bridge door ocean bird turtle movie music gallery: common
 	@echo "Generating JS from appengine/$@/template.soy"
 	mkdir -p appengine/$@/generated;
 	i18n/json_to_js.py --output_dir appengine/$@/generated --template appengine/$@/template.soy json/*.json;

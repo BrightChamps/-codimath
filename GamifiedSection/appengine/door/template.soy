@@ -1,10 +1,10 @@
-{namespace Maze.soy}
+{namespace Door.soy}
 
 /**
  * This is a Closure Template.
  *
  * To regenerate just English, run:
- *   make maze-en
+ *   make door-en
  *
  * To regenerate all languages, run:
  *   make languages
@@ -16,38 +16,38 @@
 {template .messages}
   {call BlocklyGames.soy.messages /}
   <div style="display: none">
-    <span id="Maze_moveForward">{msg meaning="Maze.moveForward" desc="block text - Imperative or infinitive of a verb for a person moving (walking) in the direction he/she is facing."}move forward{/msg}</span>
-    <span id="Maze_turnNorth">{msg meaning="Maze.turnNorth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North.  Prefer a translation that has text in common with the translation of 'turn North'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North{/msg}</span>
-    <span id="Maze_turnNorthEast">{msg meaning="Maze.turnNorthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North East.  Prefer a translation that has text in common with the translation of 'turn North-East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North-East{/msg}</span>
-    <span id="Maze_turnEast">{msg meaning="Maze.turnEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body East.  Prefer a translation that has text in common with the translation of 'turn East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn East{/msg}</span>
-    <span id="Maze_turnSouthEast">{msg meaning="Maze.turnSouthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South East.  Prefer a translation that has text in common with the translation of 'turn South-East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South-East{/msg}</span>
-    <span id="Maze_turnSouth">{msg meaning="Maze.turnSouth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South.  Prefer a translation that has text in common with the translation of 'turn South'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South{/msg}</span>
-    <span id="Maze_turnSouthWest">{msg meaning="Maze.turnSouthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South West.  Prefer a translation that has text in common with the translation of 'turn South-West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South-West{/msg}</span>
-    <span id="Maze_turnWest">{msg meaning="Maze.turnWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body West.  Prefer a translation that has text in common with the translation of 'turn West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn West{/msg}</span>
-    <span id="Maze_turnNorthWest">{msg meaning="Maze.turnNorthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North West.  Prefer a translation that has text in common with the translation of 'turn North-West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North-West{/msg}</span>
-    <span id="Maze_doCode">{{msg meaning="Maze.doCode" desc="block text - Imperative or infinitive of a verb preceding one or more commands to a person.  This is part of [https://github.com/google/blockly/wiki/Loops#repeat repeat] and [https://github.com/google/blockly/wiki/IfElse#If_blocks if] blocks.\n{lb}{lb}Identical|Do{rb}{rb}"}}do{{/msg}}</span>
-    <span id="Maze_elseCode">{{msg meaning="Maze.elseCode" desc="block text - Conjunction meaning 'otherwise', introducing commands to be performed if a previous condition was not true, as in 'if x>3, do this, else do that'.  See [https://github.com/google/blockly/wiki/IfElse#If-Else_blocks].\n{lb}{lb}Identical|Else{rb}{rb}"}}else{{/msg}}</span>
+    <span id="Door_moveForward">{msg meaning="Door.moveForward" desc="block text - Imperative or infinitive of a verb for a person moving (walking) in the direction he/she is facing."}move forward{/msg}</span>
+    <span id="Door_turnNorth">{msg meaning="Door.turnNorth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North.  Prefer a translation that has text in common with the translation of 'turn North'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North{/msg}</span>
+    <span id="Door_turnNorthEast">{msg meaning="Door.turnNorthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North East.  Prefer a translation that has text in common with the translation of 'turn North-East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North-East{/msg}</span>
+    <span id="Door_turnEast">{msg meaning="Door.turnEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body East.  Prefer a translation that has text in common with the translation of 'turn East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn East{/msg}</span>
+    <span id="Door_turnSouthEast">{msg meaning="Door.turnSouthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South East.  Prefer a translation that has text in common with the translation of 'turn South-East'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South-East{/msg}</span>
+    <span id="Door_turnSouth">{msg meaning="Door.turnSouth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South.  Prefer a translation that has text in common with the translation of 'turn South'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South{/msg}</span>
+    <span id="Door_turnSouthWest">{msg meaning="Door.turnSouthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body South West.  Prefer a translation that has text in common with the translation of 'turn South-West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn South-West{/msg}</span>
+    <span id="Door_turnWest">{msg meaning="Door.turnWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body West.  Prefer a translation that has text in common with the translation of 'turn West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn West{/msg}</span>
+    <span id="Door_turnNorthWest">{msg meaning="Door.turnNorthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body North West.  Prefer a translation that has text in common with the translation of 'turn North-West'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn North-West{/msg}</span>
+    <span id="Door_doCode">{{msg meaning="Door.doCode" desc="block text - Imperative or infinitive of a verb preceding one or more commands to a person.  This is part of [https://github.com/google/blockly/wiki/Loops#repeat repeat] and [https://github.com/google/blockly/wiki/IfElse#If_blocks if] blocks.\n{lb}{lb}Identical|Do{rb}{rb}"}}do{{/msg}}</span>
+    <span id="Door_elseCode">{{msg meaning="Door.elseCode" desc="block text - Conjunction meaning 'otherwise', introducing commands to be performed if a previous condition was not true, as in 'if x>3, do this, else do that'.  See [https://github.com/google/blockly/wiki/IfElse#If-Else_blocks].\n{lb}{lb}Identical|Else{rb}{rb}"}}else{{/msg}}</span>
     // The helpIfElse definition was copied up here ahead of when it is needed
     // so that it is adjacent to the previous definition.
-    <span id="Maze_helpIfElse">{msg meaning="Maze.helpIfElse" desc="callout - This is shown when the 'if-else' block is introduced.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}</span>
-    <span id="Maze_pathAhead">{msg meaning="Maze.pathAhead" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path ahead', as in: 'if path ahead, go forward'.  Prefer translation that has text in common with 'if path to the left' and 'if path to the right'."}if path ahead{/msg}</span>
-    <span id="Maze_pathNorth">{msg meaning="Maze.pathNorth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North', as in: 'if path to the North, turn North'."}if path to the North{/msg}</span>
-    <span id="Maze_pathNorthEast">{msg meaning="Maze.pathNorthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North-East', as in: 'if path to the North-East, turn North-East'."}if path to the North-East{/msg}</span>
-    <span id="Maze_pathEast">{msg meaning="Maze.pathEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the East', as in: 'if path to the East, turn East'."}if path to the East{/msg}</span>
-    <span id="Maze_pathSouthEast">{msg meaning="Maze.pathSouthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South-East', as in: 'if path to the South-East, turn South-East'."}if path to the South-East{/msg}</span>
-    <span id="Maze_pathSouth">{msg meaning="Maze.pathSouth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South', as in: 'if path to the South, turn South'."}if path to the South{/msg}</span>
-    <span id="Maze_pathSouthWest">{msg meaning="Maze.pathSouthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South-West', as in: 'if path to the South-West, turn South-West'."}if path to the South-West{/msg}</span>
-    <span id="Maze_pathWest">{msg meaning="Maze.pathWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the West', as in: 'if path to the West, turn West'."}if path to the West{/msg}</span>
-    <span id="Maze_pathNorthWest">{msg meaning="Maze.pathNorthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North-West', as in: 'if path to the North-West, turn North-West'."}if path to the North-West{/msg}</span>
-    <span id="Maze_repeatUntil">{msg meaning="Maze.repeatUntil" desc="block text - Imperative or infinitive of a verb to repeat the following commands.  The phrase is followed by the symbol denoting the end of the maze."}repeat until{/msg}</span>
-    <span id="Maze_moveForwardTooltip">{msg meaning="Maze.moveForwardTooltip" desc="tooltip - Moves the icon on the screen representing the player forward one square on the maze board."}Moves the player forward one space.{/msg}</span>
-    <span id="Maze_turnTooltip">{msg meaning="Maze.turnTooltip" desc="tooltip - Turns the icon on the screen representing the player 90 degrees counter-clockwise (left) or clockwise (right)."}Turns the player left or right by 90 degrees.{/msg}</span>
-    <span id="Maze_ifTooltip">{msg meaning="Maze.ifTooltip" desc="tooltip - 'path' refers to a path through a maze."}If there is a path in the specified direction, then do some actions.{/msg}</span>
-    <span id="Maze_ifelseTooltip">{msg meaning="Maze.ifelseTooltip" desc="tooltip - 'path' refers to a path through a maze."}If there is a path in the specified direction, then do the first block of actions. Otherwise, do the second block of actions.{/msg}</span>
-    <span id="Maze_whileTooltip">{msg meaning="Maze.whileTooltip" desc="tooltip - Repeat the enclosed commands until the maze has been successfully completed (the end point reached)."}Repeat the enclosed actions until finish point is reached.{/msg}</span>
-    <span id="Maze_capacity0">{msg meaning="Maze.capacity0" desc="warning - No more blocks may be added until some are removed.  Please include '%0' in the translated string.  It will be replaced with '0' and made bold."}You have %0 blocks left.{/msg}</span>
-    <span id="Maze_capacity1">{{msg meaning="Maze.capacity1" desc="warning - Only one more block may be added. Please include '%1' in the translated string. It will be replaced with '1' and made bold.\n\nSee also:\n* {lb}{lb}msg-blockly|Maze.capacity2{rb}{rb}"}}You have %1 block left.{{/msg}}</span>
-    <span id="Maze_capacity2">{{msg meaning="Maze.capacity2" desc="warning - Only %2 more blocks may be used, where %2 is an integer greater than 1.\n\nSee also:\n* {lb}{lb}msg-blockly|Maze.capacity1{rb}{rb}"}}You have %2 blocks left.{{/msg}}</span>
+    <span id="Door_helpIfElse">{msg meaning="Door.helpIfElse" desc="callout - This is shown when the 'if-else' block is introduced.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}</span>
+    <span id="Door_pathAhead">{msg meaning="Door.pathAhead" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path ahead', as in: 'if path ahead, go forward'.  Prefer translation that has text in common with 'if path to the left' and 'if path to the right'."}if path ahead{/msg}</span>
+    <span id="Door_pathNorth">{msg meaning="Door.pathNorth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North', as in: 'if path to the North, turn North'."}if path to the North{/msg}</span>
+    <span id="Door_pathNorthEast">{msg meaning="Door.pathNorthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North-East', as in: 'if path to the North-East, turn North-East'."}if path to the North-East{/msg}</span>
+    <span id="Door_pathEast">{msg meaning="Door.pathEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the East', as in: 'if path to the East, turn East'."}if path to the East{/msg}</span>
+    <span id="Door_pathSouthEast">{msg meaning="Door.pathSouthEast" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South-East', as in: 'if path to the South-East, turn South-East'."}if path to the South-East{/msg}</span>
+    <span id="Door_pathSouth">{msg meaning="Door.pathSouth" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South', as in: 'if path to the South, turn South'."}if path to the South{/msg}</span>
+    <span id="Door_pathSouthWest">{msg meaning="Door.pathSouthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the South-West', as in: 'if path to the South-West, turn South-West'."}if path to the South-West{/msg}</span>
+    <span id="Door_pathWest">{msg meaning="Door.pathWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the West', as in: 'if path to the West, turn West'."}if path to the West{/msg}</span>
+    <span id="Door_pathNorthWest">{msg meaning="Door.pathNorthWest" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the North-West', as in: 'if path to the North-West, turn North-West'."}if path to the North-West{/msg}</span>
+    <span id="Door_repeatUntil">{msg meaning="Door.repeatUntil" desc="block text - Imperative or infinitive of a verb to repeat the following commands.  The phrase is followed by the symbol denoting the end of the door."}repeat until{/msg}</span>
+    <span id="Door_rotateTooltip">{msg meaning="Door.roateTooltip" desc="tooltip - Rotates the selected block by the specified amount in specified direction."}Rotates the selected block by the specified amount in specified direction.{/msg}</span>
+    <span id="Door_moveTooltip">{msg meaning="Door.moveTooltip" desc="tooltip - Exchanges the selected block with the move to location block."}Exchanges the selected block with the move to location block.{/msg}</span>
+    <span id="Door_ifTooltip">{msg meaning="Door.ifTooltip" desc="tooltip - 'path' refers to a path through a door."}If there is a path in the specified direction, then do some actions.{/msg}</span>
+    <span id="Door_ifelseTooltip">{msg meaning="Door.ifelseTooltip" desc="tooltip - 'path' refers to a path through a door."}If there is a path in the specified direction, then do the first block of actions. Otherwise, do the second block of actions.{/msg}</span>
+    <span id="Door_whileTooltip">{msg meaning="Door.whileTooltip" desc="tooltip - Repeat the enclosed commands until the door has been successfully completed (the end point reached)."}Repeat the enclosed actions until finish point is reached.{/msg}</span>
+    <span id="Door_capacity0">{msg meaning="Door.capacity0" desc="warning - No more blocks may be added until some are removed.  Please include '%0' in the translated string.  It will be replaced with '0' and made bold."}You have %0 blocks left.{/msg}</span>
+    <span id="Door_capacity1">{{msg meaning="Door.capacity1" desc="warning - Only one more block may be added. Please include '%1' in the translated string. It will be replaced with '1' and made bold.\n\nSee also:\n* {lb}{lb}msg-blockly|Door.capacity2{rb}{rb}"}}You have %1 block left.{{/msg}}</span>
+    <span id="Door_capacity2">{{msg meaning="Door.capacity2" desc="warning - Only %2 more blocks may be used, where %2 is an integer greater than 1.\n\nSee also:\n* {lb}{lb}msg-blockly|Door.capacity1{rb}{rb}"}}You have %2 blocks left.{{/msg}}</span>
   </div>
 {/template}
 
@@ -58,7 +58,7 @@
   {call .messages /}
   {call BlocklyGames.soy.headerBar}
     {param appName}
-      {msg meaning="Games.maze" desc="IBID"}Maze{/msg}
+      {msg meaning="Games.door" desc="IBID"}Door{/msg}
     {/param}
     {param levelLinkSuffix}skin={$ij.skin}{/param}
     {param hasLinkButton: true /}
@@ -72,14 +72,7 @@
   {/call}
 
   <div id="visualization">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="1200px" height="1000px">
-      <g id="look" fill="#914942" style="opacity : 0.98">
-        <path d="M -1200, -1000, h2400 v2000 h-2400z
-                  M 100, 100
-                  m -100, 0
-                  a 100,100 0 1,0 200,0
-                  a 100,100 0 1,0 -200,0"/>
-      </g>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgDoor" width="1200px" height="1000px">
     </svg>
     <div id="capacityBubble">
       <div id="capacity"></div>
@@ -91,10 +84,10 @@
   <table id="buttontable" width="500px">
     <tr>
       <td style="text-align : centre">
-        <button id="runButton" class="primary"title="{msg meaning="Maze.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the player through the maze."}Makes the player do what the blocks say.{/msg}">
+        <button id="runButton" class="primary"title="{msg meaning="Door.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the player through the door."}Makes the player do what the blocks say.{/msg}">
           <img src="common/1x1.gif" class="run icon21"> {msg meaning="Games.runProgram" desc="IBID"}Run Program{/msg}
         </button>
-        <button id="resetButton"  class="primary"title="{msg meaning="Maze.resetTooltip" desc="tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again."}Put the player back at the start of the maze.{/msg}">
+        <button id="resetButton"  class="primary"title="{msg meaning="Door.resetTooltip" desc="tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again."}Put the player back at the start of the door.{/msg}">
           <img src="common/1x1.gif" class="stop icon21"> {msg meaning="Games.resetProgram" desc="IBID"}Reset{/msg}
         </button>
       </td>
@@ -132,7 +125,7 @@
   <div id="help" class="dialogHiddenContent">
     <div style="padding-bottom: 0.7ex">
         {msg meaning="Movie.helpText1" desc="Instructions."}
-          Solve the area corresponding to block you are standing on and move to the correct direction to solve this maze.
+          Solve the area corresponding to block you are standing on and move to the correct direction to solve this door.
         {/msg}
     </div>
     {call BlocklyGames.soy.ok /}
@@ -143,45 +136,45 @@
       <table><tr><td>
         <img src="common/help.png">
       </td><td>&nbsp;</td><td>
-        {msg meaning="Maze.helpStack" desc="callout - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+        {msg meaning="Door.helpStack" desc="callout - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
       </td><td valign="top">
-        <img src="maze/help_stack.png" class="mirrorImg" height=63 width=136>
+        <img src="door/help_stack.png" class="mirrorImg" height=63 width=136>
       </td></tr></table>
     </div>
     <div id="dialogHelpOneTopBlock" class="dialogHiddenContent">
       <table><tr><td>
         <img src="common/help.png">
       </td><td>&nbsp;</td><td>
-        {msg meaning="Maze.helpOneTopBlock" desc="callout - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}
+        {msg meaning="Door.helpOneTopBlock" desc="callout - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}
         <div id="sampleOneTopBlock" class="readonly"></div>
       </td></tr></table>
     </div>
     <div id="dialogHelpRun" class="dialogHiddenContent">
       <table><tr><td>
-        {msg meaning="Maze.helpRun" desc="callout - This is shown after the user has created a program on the first level."}Run your program to see what happens.{/msg}
+        {msg meaning="Door.helpRun" desc="callout - This is shown after the user has created a program on the first level."}Run your program to see what happens.{/msg}
       </td><td rowspan=2>
         <img src="common/help.png">
       </td></tr><tr><td>
-        <div><img src="maze/help_run.png" class="mirrorImg" height=27 width=141></div>
+        <div><img src="door/help_run.png" class="mirrorImg" height=27 width=141></div>
       </td></tr></table>
     </div>
   {elseif $ij.level == 2}
     <div id="dialogHelpReset" class="dialogHiddenContent">
       <table><tr><td>
-        {msg meaning="Maze.helpReset" desc="callout - This is shown after the user has run a program that does not solve the maze."}Your program didn't solve the maze. Press 'Reset' and try again.{/msg}
+        {msg meaning="Door.helpReset" desc="callout - This is shown after the user has run a program that does not solve the door."}Your program didn't solve the door. Press 'Reset' and try again.{/msg}
       </td><td rowspan=2>
         <img src="common/help.png">
       </td></tr><tr><td>
-        <div><img src="maze/help_run.png" class="mirrorImg" height=27 width=141></div>
+        <div><img src="door/help_run.png" class="mirrorImg" height=27 width=141></div>
       </td></tr></table>
     </div>
   {elseif $ij.level == 3 or $ij.level == 4}
     {if $ij.level == 3}
       <div id="dialogHelpRepeat" class="dialogHiddenContent">
         <table><tr><td>
-          <img src="maze/help_up.png">
+          <img src="door/help_up.png">
         </td><td>
-          {msg meaning="Maze.helpRepeat" desc="callout - This is shown when the 'repeat' block is introduced.  The word 'path' refers to a path through a maze, and 'block' refers to a child's building block."}Reach the end of this path using only two blocks. Use 'repeat' to run a block more than once.{/msg}
+          {msg meaning="Door.helpRepeat" desc="callout - This is shown when the 'repeat' block is introduced.  The word 'path' refers to a path through a door, and 'block' refers to a child's building block."}Reach the end of this path using only two blocks. Use 'repeat' to run a block more than once.{/msg}
         </td><td>
           <img src="common/help.png">
         </td></tr></table>
@@ -191,14 +184,14 @@
       <table><tr><td>
         <img src="common/help.png">
       </td><td>&nbsp;</td><td>
-        {msg meaning="Maze.helpCapacity" desc="callout - This is shown after the user has used all the blocks permitted on this level."}You have used up all the blocks for this level. To create a new block, you first need to delete an existing block.{/msg}
+        {msg meaning="Door.helpCapacity" desc="callout - This is shown after the user has used all the blocks permitted on this level."}You have used up all the blocks for this level. To create a new block, you first need to delete an existing block.{/msg}
       </td></tr></table>
     </div>
     <div id="dialogHelpRepeatMany" class="dialogHiddenContent">
       <table><tr><td>
-        <img src="maze/help_up.png">
+        <img src="door/help_up.png">
       </td><td>
-        {msg meaning="Maze.helpRepeatMany" desc="callout - This is a hint that the user should place a second block inside of a a 'repeat' block."}You can fit more than one block inside a 'repeat' block.{/msg}
+        {msg meaning="Door.helpRepeatMany" desc="callout - This is a hint that the user should place a second block inside of a a 'repeat' block."}You can fit more than one block inside a 'repeat' block.{/msg}
       </td><td>
         <img src="common/help.png">
       </td></tr></table>
@@ -208,17 +201,17 @@
       <table><tr><td>
         <img src="common/help.png">
       </td><td width="95%">
-        {{msg meaning="Maze.helpSkins" desc="callout - This is a hint that the user can change the appearance of the player that moves within the maze."}}Choose your favourite player from this menu.{{/msg}}
+        {{msg meaning="Door.helpSkins" desc="callout - This is a hint that the user can change the appearance of the player that moves within the door."}}Choose your favourite player from this menu.{{/msg}}
       </td><td>
-        <img src="maze/help_up.png">
+        <img src="door/help_up.png">
       </td></tr></table>
     </div>
   {elseif $ij.level == 6}
     <div id="dialogHelpIf" class="dialogHiddenContent">
       <table><tr><td>
-        <img src="maze/help_up.png">
+        <img src="door/help_up.png">
       </td><td>
-        {msg meaning="Maze.helpIf" desc="callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true. Try turning left if there is a path to the left.{/msg}
+        {msg meaning="Door.helpIf" desc="callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true. Try turning left if there is a path to the left.{/msg}
       </td><td>
         <img src="common/help.png">
       </td></tr></table>
@@ -226,9 +219,9 @@
   {elseif $ij.level == 7}
     <div id="dialogHelpMenu" class="dialogHiddenContent">
       <table><tr><td>
-        <img src="maze/help_up.png">
+        <img src="door/help_up.png">
       </td><td id="helpMenuText">
-        {msg meaning="Maze.helpMenu" desc="callout - %1 will be replaced with an image of the dropdown menu that the user needs to click."}Click on %1 in the 'if' block to change its condition.{/msg}
+        {msg meaning="Door.helpMenu" desc="callout - %1 will be replaced with an image of the dropdown menu that the user needs to click."}Click on %1 in the 'if' block to change its condition.{/msg}
       </td><td>
         <img src="common/help.png">
       </td></tr></table>
@@ -236,9 +229,9 @@
   {elseif $ij.level == 9}
     <div id="dialogHelpIfElse" class="dialogHiddenContent">
       <table><tr><td>
-        <img src="maze/help_down.png">
+        <img src="door/help_down.png">
       </td><td>
-        {msg meaning="Maze.helpIfElse" desc="IBID"}
+        {msg meaning="Door.helpIfElse" desc="IBID"}
           If-else blocks will do one thing or the other.
         {/msg}
       </td><td>
@@ -250,8 +243,8 @@
       <table><tr><td>
         <img src="common/help.png">
       </td><td>&nbsp;</td><td>
-        {msg meaning="Maze.helpWallFollow" desc="callout - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceeding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}
-          Can you solve this complicated maze? Try following the left-hand wall. Advanced programmers only!
+        {msg meaning="Door.helpWallFollow" desc="callout - This advises the user to solve a door by keeping his/her left hand in contact with the wall while proceeding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}
+          Can you solve this complicated door? Try following the left-hand wall. Advanced programmers only!
         {/msg}
         {call BlocklyGames.soy.ok /}
       </td></tr></table>
@@ -264,19 +257,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" xmlns="https://developers.google.com/blockly/xml">
-    <block type="maze_moveForward"></block>
-    <block type="maze_turn"><field name="DIR">turnNorth</field></block>
-
-    {if $ij.level > 2}
-      <block type="maze_forever"></block>
-      {if $ij.level == 6}
-        <block type="maze_if"><field name="DIR">isPathLeft</field></block>
-      {elseif $ij.level > 6}
-        <block type="maze_if"></block>
-        {if $ij.level > 8}
-          <block type="maze_ifElse"></block>
-        {/if}
-      {/if}
-    {/if}
+    <block type="door_rotate"></block>
+    <block type = "door_moveblock"></block>
   </xml>
 {/template}
