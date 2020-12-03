@@ -1947,5 +1947,23 @@ Mazeangle.showHelp = function() {
 Mazeangle.hideHelp = function() {
  BlocklyDialogs.stopDialogKeyDown();
 };
+Mazeangle.storymessage = function (){
+  var text1 = "Congratulations on making it so far into the game!!";
+  var text2 = "Rest of the pages that lead to the treasure in the book \"Treasure Hunt\" are missing and you have to follow the rest of the path on your own. But luckliy you see some inscribings on the wall which can help you in search of the box.";
+  var text3 = "You find yourself in a maze to move forward you must solve the maze corretly or risk getting stuck forever. Good luck solving the puzzle!!";
+  var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
+  document.getElementById('p1').textContent = text1;
+  document.getElementById('p2').textContent = text2;
+  document.getElementById('p3').textContent = text3;
+  document.getElementById('p4').textContent = text4;
+  document.getElementById('p2').style.top = document.getElementById('p1').offsetTop + document.getElementById('p1').offsetHeight + 'px';
+  document.getElementById('p3').style.top = document.getElementById('p2').offsetTop + document.getElementById('p2').offsetHeight + 'px';
+  function startlevel (){
+    Mazeangle.init();
+    document.getElementById('storyMessageM').style.display = 'none';
+  };
+  document.getElementById('cross').addEventListener("click",startlevel);
+  document.getElementById('cross').addEventListener("touchend",startlevel);
+};
 
-window.addEventListener('load', Mazeangle.init);
+window.addEventListener('load', Mazeangle.storymessage);

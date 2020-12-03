@@ -52,9 +52,315 @@
       }
     }
   }
+  window.loadscreen = function (){
+    if(typeof successfulload === 'undefined'){
+      setTimeout(loadscreen,15);
+    }
+    else {
+      var myProgress = new ProgressBar.Path('#heart-pathB', {
+        easing: 'easeIn',
+         duration: 1400,
+         attachment: document.querySelector('#example > svg'),
+         from: { color: '#eee' },
+          to: { color: '#000' },
+          step: function(state, path, attachment) {
+          }
+       });
+      var myProgress2 = new ProgressBar.Path('#heart-pathr', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressi = new ProgressBar.Path('#heart-pathi', {
+          easing: 'easeIn',
+           duration: 1400,
+           attachment: document.querySelector('#example > svg'),
+           from: { color: '#eee' },
+            to: { color: '#000' },
+            step: function(state, path, attachment) {
+            }
+         });
+      var myProgresso = new ProgressBar.Path('#heart-patho', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressg = new ProgressBar.Path('#heart-pathg', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressh = new ProgressBar.Path('#heart-pathh', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgresst = new ProgressBar.Path('#heart-patht', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressC = new ProgressBar.Path('#heart-pathC', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressH = new ProgressBar.Path('#heart-pathH', {
+           easing: 'easeIn',
+            duration: 1400,
+            attachment: document.querySelector('#example > svg'),
+            from: { color: '#eee' },
+             to: { color: '#000' },
+             step: function(state, path, attachment) {
+             }
+          });
+      var myProgressA = new ProgressBar.Path('#heart-pathA', {
+             easing: 'easeIn',
+              duration: 1400,
+              attachment: document.querySelector('#example > svg'),
+              from: { color: '#eee' },
+               to: { color: '#000' },
+               step: function(state, path, attachment) {
+               }
+            });
+      var myProgressM = new ProgressBar.Path('#heart-pathM', {
+               easing: 'easeIn',
+                duration: 1400,
+                attachment: document.querySelector('#example > svg'),
+                from: { color: '#eee' },
+                 to: { color: '#000' },
+                 step: function(state, path, attachment) {
+                 }
+              });
+      var myProgressP = new ProgressBar.Path('#heart-pathP', {
+                 easing: 'easeIn',
+                  duration: 1400,
+                  attachment: document.querySelector('#example > svg'),
+                  from: { color: '#eee' },
+                   to: { color: '#000' },
+                   step: function(state, path, attachment) {
+                   }
+                });
+      var myProgressS = new ProgressBar.Path('#heart-pathS', {
+                   easing: 'easeIn',
+                    duration: 1400,
+                    attachment: document.querySelector('#example > svg'),
+                    from: { color: '#eee' },
+                     to: { color: '#000' },
+                     step: function(state, path, attachment) {
+                     }
+                  });
+      myProgress.set(0);
+      myProgress.animate(1.0);  // Number from 0.0 to 1.0
+      myProgress2.set(0);
+      myProgress2.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressi.set(0);
+      myProgressi.animate(1.0);  // Number from 0.0 to 1.0
+      myProgresso.set(0);
+      myProgresso.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressg.set(0);
+      myProgressg.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressh.set(0);
+      myProgressh.animate(1.0);  // Number from 0.0 to 1.0
+      myProgresst.set(0);
+      myProgresst.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressC.set(0);
+      myProgressC.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressH.set(0);
+      myProgressH.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressA.set(0);
+      myProgressA.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressM.set(0);
+      myProgressM.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressP.set(0);
+      myProgressP.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressS.set(0);
+      myProgressS.animate(1.0);  // Number from 0.0 to 1.0
+      setTimeout(function(){
+        document.getElementById('fullscreenloader').style.display = 'none';
+        document.getElementById('miniloader').style.display = 'none';
+      },2000);
+    }
+  };
+  window.miniloader = function (){
+    if(typeof successfulload === 'undefined'){
+      setTimeout(loadscreen,15);
+    }
+    else {
+      // document.getElementById('miniloader').stye.display='block';
+      var myProgress = new ProgressBar.Path('#heart-mpathB', {
+        easing: 'easeIn',
+         duration: 1400,
+         attachment: document.querySelector('#example > svg'),
+         from: { color: '#eee' },
+          to: { color: '#000' },
+          step: function(state, path, attachment) {
+          }
+       });
+      var myProgress2 = new ProgressBar.Path('#heart-mpathr', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressi = new ProgressBar.Path('#heart-mpathi', {
+          easing: 'easeIn',
+           duration: 1400,
+           attachment: document.querySelector('#example > svg'),
+           from: { color: '#eee' },
+            to: { color: '#000' },
+            step: function(state, path, attachment) {
+            }
+         });
+      var myProgresso = new ProgressBar.Path('#heart-mpatho', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressg = new ProgressBar.Path('#heart-mpathg', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressh = new ProgressBar.Path('#heart-mpathh', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgresst = new ProgressBar.Path('#heart-mpatht', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressC = new ProgressBar.Path('#heart-mpathC', {
+         easing: 'easeIn',
+          duration: 1400,
+          attachment: document.querySelector('#example > svg'),
+          from: { color: '#eee' },
+           to: { color: '#000' },
+           step: function(state, path, attachment) {
+           }
+        });
+      var myProgressH = new ProgressBar.Path('#heart-mpathH', {
+           easing: 'easeIn',
+            duration: 1400,
+            attachment: document.querySelector('#example > svg'),
+            from: { color: '#eee' },
+             to: { color: '#000' },
+             step: function(state, path, attachment) {
+             }
+          });
+      var myProgressA = new ProgressBar.Path('#heart-mpathA', {
+             easing: 'easeIn',
+              duration: 1400,
+              attachment: document.querySelector('#example > svg'),
+              from: { color: '#eee' },
+               to: { color: '#000' },
+               step: function(state, path, attachment) {
+               }
+            });
+      var myProgressM = new ProgressBar.Path('#heart-mpathM', {
+               easing: 'easeIn',
+                duration: 1400,
+                attachment: document.querySelector('#example > svg'),
+                from: { color: '#eee' },
+                 to: { color: '#000' },
+                 step: function(state, path, attachment) {
+                 }
+              });
+      var myProgressP = new ProgressBar.Path('#heart-mpathP', {
+                 easing: 'easeIn',
+                  duration: 1400,
+                  attachment: document.querySelector('#example > svg'),
+                  from: { color: '#eee' },
+                   to: { color: '#000' },
+                   step: function(state, path, attachment) {
+                   }
+                });
+      var myProgressS = new ProgressBar.Path('#heart-mpathS', {
+                   easing: 'easeIn',
+                    duration: 1400,
+                    attachment: document.querySelector('#example > svg'),
+                    from: { color: '#eee' },
+                     to: { color: '#000' },
+                     step: function(state, path, attachment) {
+                     }
+                  });
+      myProgress.set(0);
+      myProgress.animate(1.0);  // Number from 0.0 to 1.0
+      myProgress2.set(0);
+      myProgress2.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressi.set(0);
+      myProgressi.animate(1.0);  // Number from 0.0 to 1.0
+      myProgresso.set(0);
+      myProgresso.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressg.set(0);
+      myProgressg.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressh.set(0);
+      myProgressh.animate(1.0);  // Number from 0.0 to 1.0
+      myProgresst.set(0);
+      myProgresst.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressC.set(0);
+      myProgressC.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressH.set(0);
+      myProgressH.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressA.set(0);
+      myProgressA.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressM.set(0);
+      myProgressM.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressP.set(0);
+      myProgressP.animate(1.0);  // Number from 0.0 to 1.0
+      myProgressS.set(0);
+      myProgressS.animate(1.0);  // Number from 0.0 to 1.0
+      setTimeout(function(){
+        document.getElementById('miniloader').style.display = 'none';
+      },2000);
+    }
+  };
   window['BlocklyGamesLang'] = lang;
-
-  // Load the chosen language pack.
   var script = document.createElement('script');
   var debug = true;
   try {
@@ -71,4 +377,6 @@
   //     '/uncompressed.js';
   script.type = 'text/javascript';
   document.head.appendChild(script);
+  // Load the chosen language pack.
+
 })();

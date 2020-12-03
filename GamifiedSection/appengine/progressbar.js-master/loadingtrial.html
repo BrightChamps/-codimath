@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Games : Start</title>
+  <div id="example"></div>
+  <script src="./dist/progressbar.min.js"></script>
+  <script>
+    var myProgress = new ProgressBar.Shape('#example', {
+
+        color: '#555',
+        strokeWidth: 1.0,
+        trailColor: '#eee',
+        trailWidth: 1.0,
+        svgStyle: {
+          display: 'block',
+          width: '100%'
+        },
+        text: {
+          value: 'Text',
+          className: 'progressbar__label',
+          style: {
+            color: '#f00',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            padding: 0,
+            margin: 0,
+            transform: {
+                prefix: true,
+                value: 'translate(-50%, -50%)'
+            }
+          },
+          autoStyleContainer: true,
+          alignToBottom: true
+        },
+
+        // Fill color for the shape. If null, no fill.
+        fill: null,
+
+        // Duration for animation in milliseconds
+        duration: 800,
+
+        // Easing for animation.
+        // 'linear', 'easeIn', 'easeOut', 'easeInOut'
+        easing: 'linear',
+
+        // Built-in shape passes reference to itself and a custom attachment object to step function
+        from: { color: '#eee' },
+        to: { color: '#000' },
+        step: function(state, circle, attachment) {
+          circle.path.setAttribute('stroke', state.color);
+        },
+
+        // If true, some useful console.warn calls will be done if it seems that progressbar is used incorrectly
+        warnings: false
+
+        // SVG element
+        instance.svg
+
+        // SVG path
+        instance.path
+
+        // SVG path which presents the trail of the progress bar
+        instance.trail
+
+        // <p> element which presents the text label for progress bar
+        instance.text
+
+        // animate to a specific value (0-1)
+        instance.animate(progress, [options], [cb]);
+
+        // set a new value
+        instance.set(progress);
+
+        // stop the animation
+        instance.stop();
+
+        // get the current value
+        instance.value();
+
+        // set text
+        instance.setText(text);
+
+        // destroy the instance
+        instance.destroy();
+
+    });
+
+  </script>
+
+</head>
+<body>
+  <noscript>Blockly Games requires JavaScript.</noscript>
+</body>
+</html>

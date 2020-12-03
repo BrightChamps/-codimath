@@ -1946,5 +1946,23 @@ Maze.showHelp = function() {
 Maze.hideHelp = function() {
  BlocklyDialogs.stopDialogKeyDown();
 };
+Maze.storymessage = function (){
+  var text1 = "Congratulations on making it to the circus!!";
+  var text2 = "You have done so good in all these levels may be you are close to the end let's push a bit more for that Treasure";
+  var text3 = "You walked a bit more after the last puzzle and found yourself in another maze but the inscribings on the wall say this one is a bit tricky let's solve this one and reach to the end.";
+  var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
+  document.getElementById('p1').textContent = text1;
+  document.getElementById('p2').textContent = text2;
+  document.getElementById('p3').textContent = text3;
+  document.getElementById('p4').textContent = text4;
+  document.getElementById('p2').style.top = document.getElementById('p1').offsetTop + document.getElementById('p1').offsetHeight + 'px';
+  document.getElementById('p3').style.top = document.getElementById('p2').offsetTop + document.getElementById('p2').offsetHeight + 'px';
+  function startlevel (){
+    document.getElementById('storyMessageM2').style.display = 'none';
+    Maze.init();
+  };
+  document.getElementById('cross').addEventListener("click",startlevel);
+  document.getElementById('cross').addEventListener("touchend",startlevel);
+};
 
-window.addEventListener('load', Maze.init);
+window.addEventListener('load', Maze.storymessage);

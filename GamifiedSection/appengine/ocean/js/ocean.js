@@ -59,7 +59,8 @@ Ocean.SKINS = [
     island: 'ocean/islandmarker.png',
     stone: 'ocean/stonemarker.png',
     background: 'ocean/beachF2.png',
-    backgroundwater: 'ocean/ocean1.png',
+    backgroundwater: 'ocean/empty.png',
+    scene:'ocean/scene.jpg',
     look: '#000',
     coin: 'ocean/coin-sprite.png',
     winSound: ['ocean/win.mp3', 'ocean/win.ogg'],
@@ -278,9 +279,6 @@ Ocean.oceanDirection = Ocean.DirectionType.NORTHEAST;
  */
 Ocean.pidList = [];
 
-// Map each possible shape to a sprite.
-// Input: Binary string representing Centre/North/West/South/East squares.
-// Output: [x, y] coordinates of each tile's sprite in tiles.png.
 Ocean.tile_SHAPES = {
   '0,0':[0,0],
   '1,0':[1,0],
@@ -314,28 +312,6 @@ Ocean.tile_SHAPES = {
   '5,4':[5,4]
 };
 
-Ocean.tile_SHAPES_path = {
-  '10010': [4, 0],  // Dead ends
-  '10001': [3, 3],
-  '11000': [0, 1],
-  '10100': [0, 2],
-  '11010': [4, 1],  // Vertical
-  '10101': [3, 2],  // Horizontal
-  '10110': [0, 0],  // Elbows
-  '10011': [2, 0],
-  '11001': [4, 2],
-  '11100': [2, 3],
-  '11110': [1, 1],  // Junctions
-  '10111': [1, 0],
-  '11011': [2, 1],
-  '11101': [1, 2],
-  '11111': [2, 2],  // Cross
-  'null0': [4, 3],  // Empty
-  'null1': [3, 0],
-  'null2': [3, 1],
-  'null3': [0, 3],
-  'null4': [1, 3]
-};
 
 /**
  * Create and layout all the nodes for the path, scenery, Pegman, and goal.
@@ -383,22 +359,6 @@ Ocean.drawMap = function() {
       return (Ocean.map[y][x] == Ocean.SquareType.WALL) ? '0' : '1';
     };
   //
-    // Compute and draw the tile for each square.
-    var tileId = 0;
-    // for (var y = 0; y < Ocean.ROWS; y++) {
-    //   for (var x = 0; x < Ocean.COLS + 1; x++) {
-    //     Blockly.utils.dom.createSvgElement('rect', {
-    //         'height': Ocean.SQUARE_SIZE,
-    //         'width': Ocean.SQUARE_SIZE,
-    //         'fill': 'none',
-    //         'stroke-width': 1,
-    //         'stroke': '#1E90FF',
-    //         'stroke-dasharray' : 10,
-    //         'x': (x - 1)  * Ocean.SQUARE_SIZE + Ocean.SQUARE_SIZE/2,
-    //         'y': (y) * Ocean.SQUARE_SIZE
-    //       }, svg);
-    //   }
-    // }
     var bgClip = Blockly.utils.dom.createSvgElement('clipPath', {
         'id': 'bgClipPath'
       }, svg);
@@ -470,49 +430,23 @@ Ocean.drawMap = function() {
       Ocean.SKIN.idlesprite);
 //
 };
-Ocean.shiftscreen = function() {
-  for (var y = 0; y < Ocean.ROWS; y++) {
-    for (var x = 0; x < Ocean.COLS + 1; x++) {
-        document.getElementById('ID' + x.toString()+ ',' + y.toString()).style.display = 'none';
-    }
-  }
-  // BlocklyInterface.workspace.clear();
-  var background = document.getElementById('background');
-  var pegmanIcon = document.getElementById('pegman');
-  document.getElementById('ocean').style.display = 'none';
-  var finaly = Ocean.MAZE_HEIGHT / 30;
-  for(var i=1; i <= 60; i++) {
-    Ocean.timeout = function(val) {
-      setTimeout(function() {
-        background.setAttribute('y',1 * Ocean.SQUARE_SIZE - 6 * Ocean.PEGMAN_WIDTH + 1 + (5 * val/60) * Ocean.PEGMAN_WIDTH );
-         Ocean.displayPegman(Ocean.pegmanX,
-             (Ocean.pegmanY + (4 * val/60)),
-             Ocean.constrainDirection16(4));
-       }, 100 * val);
-    }
-    Ocean.timeout(i);
-  }
-  setTimeout(function() {
-    Ocean.pegmanXcheck = Ocean.pegmanX;
-    Ocean.pegmanY = 4;
-    Ocean.pegmanYcheck = Ocean.pegmanY;
-    Ocean.pegmanD = 2;
-    Ocean.pegmanDcheck = Ocean.pegmanD;
-  }, 100 * 60.2);
-}
 
 Ocean.changeView = function() {
+  document.getElementById('miniloader').style.display = 'initial';
+  window.miniloader();
   BlocklyDialogs.hideDialog(true);
   Ocean.hidecoords = true;
   Ocean.canvasctx.clearRect(0, 0, Ocean.canvasctx.canvas.width, Ocean.canvasctx.canvas.height);
   var img = new Image();
-  img.src = 'ocean/scene.png';
-  Ocean.canvasctx.drawImage(img,0,0);
-  Ocean.waterstart = 'true';
-  Ocean.animateWaterE2W();
-  var text = "Use Sail command to sail the yatch until it reaches an island, further use logic block to avaoid obstacles in the path of the boat in a repeat until loop.";
-  document.getElementById('helptext').innerHTML = text;
-  Ocean.showHelp();
+  img.src = 'ocean/scene.jpg';
+  setTimeout(function(){
+    Ocean.canvasctx.drawImage(img,0,0);
+    Ocean.waterstart = 'true';
+    Ocean.animateWaterE2W();
+    var text = "Use Sail command to sail the yatch until it reaches an island, further use logic block to avaoid obstacles in the path of the boat in a repeat until loop.";
+    document.getElementById('helptext').innerHTML = text;
+    Ocean.showHelp();
+  },2000);
 };
 
 Ocean.animateWaterE2W = function() {
@@ -541,17 +475,20 @@ Ocean.animateWaterE2W = function() {
   var no = 0;
   var top;
   top = Ocean.canvasctx.canvas.height - 200 - 2.4*no;
+  var islandtop = Ocean.canvasctx.canvas.height - (485 + 1.8 * no + 0.43 * no);
     var $this = this; //cache
     (function loop() {
       if (!$this.paused && !$this.ended) {
         Ocean.canvasctx.drawImage($this, 0, 0 , Ocean.canvasctx.canvas.width, Ocean.canvasctx.canvas.height);
         Ocean.canvasctx.drawImage(img2, 0, 7 * no, Ocean.canvasctx.canvas.width, Ocean.canvasctx.canvas.height);
         Ocean.canvasctx.drawImage(img,0,0 + 0.45*no,6000, 4000 - 0.45*no,0,0,Ocean.canvasctx.canvas.width, Ocean.canvasctx.canvas.height - (485 + 0.43 * no++));
-        Ocean.canvasctx.drawImage(img5, 400 - 2*no,410, 200 + 6*no, 2.95*no, 400 - 2.01 * no, Ocean.canvasctx.canvas.height - (485 + 1.8 * no + 0.43 * no), 200 + 6*no, 1.8 * no);
+        Ocean.canvasctx.drawImage(img5, 400 - 2*no,410, 200 + 6*no, 2.95*no, 400 - 2.01 * no, islandtop, 200 + 6*no, 1.8 * no);
         Ocean.canvasctx.drawImage(img1,Ocean.canvasctx.canvas.width * 0.5,Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no,(0 + 0.7 * no), (0 + 0.7 * no));
         // Ocean.boatanimation(no, Ocean.left);
         // console.log(no);
-        top = Ocean.canvasctx.canvas.height - 200 - 2.4*no;
+        top = Ocean.canvasctx.canvas.height - 200 - 2*no;
+        if(no<195)
+          islandtop =  Ocean.canvasctx.canvas.height - (485 + 1.8 * no + 0.43 * no);
         Ocean.canvasctx.drawImage(img3, left, top, 200, 200);
         if(Ocean.isnear(no)){
           if(Ocean.driftpath == 'left'){
@@ -583,46 +520,22 @@ Ocean.animateWaterE2W = function() {
         setTimeout(loop, 1000 / 10); // drawing at 30fps
       }
       else if($this.ended) {
+        document.getElementById('miniloader').style.display = 'initial';
+        window.miniloader();
         BlocklyInterface.highlight(null);
         Ocean.animationended = true;
-        Ocean.caveenteringanimation();
+        setTimeout(Ocean.caveenteringanimation,2000.01);
       }
     })();
   }, 0);
 };
-// Ocean.animateWaterW2E = function() {
-//   // document.getElementById('background').style.display = 'none';
-//   var tile = document.getElementById('backgroundwater');
-//   var value = Ocean.passvalue > 0 ? Ocean.passvalue : 0;
-//   var frames = 4634 * 2 / Ocean.SQUARE_SIZE;
-//   function update() {
-//     value = ++value % frames;
-//   }
-//   function draw() {
-//     update();
-//     tile.setAttribute('x',
-//         1 * Ocean.SQUARE_SIZE/2 + value * Ocean.SQUARE_SIZE/2 - 4634 - 5 * Ocean.SQUARE_SIZE );
-//         // 1 * Ocean.SQUARE_SIZE/2 - value * Ocean.SQUARE_SIZE/2 - Ocean.MAZE_WIDTH);
-//     tile.setAttribute('y', 0);
-//   }
-//   function timercode() {
-//     if(!Ocean.waterstop){
-//       draw();
-//       setTimeout(timercode,150);
-//     }
-//     else {
-//       Ocean.passvalue = value;
-//     }
-//   }
-//   setTimeout(timercode, 150);
-// }
 
 Ocean.isnear = function(no){
-  if(Ocean.canvasctx.canvas.height - 100 - 2.4*no > Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no)
+  if(Ocean.canvasctx.canvas.height - 100 - 2*no > Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no)
     Ocean.isRock = true;
-  if(Ocean.canvasctx.canvas.height - 200 - 2.4*no > Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no)
+  if(Ocean.canvasctx.canvas.height - 200 - 2*no > Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no)
     { return false;}
-  else if(Ocean.canvasctx.canvas.height - 200 - 2.4*no + 150 < Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no)
+  else if(Ocean.canvasctx.canvas.height - 200 - 2*no + 150 < Ocean.canvasctx.canvas.height * 0.55 + 0.2 * no)
     {return false;}
   else
     return true;
@@ -786,6 +699,11 @@ Ocean.init = function() {
   Ocean.canvasctx = document.getElementById('canvasOcean').getContext('2d');
   Ocean.driftpath;
   Ocean.waterstart = 'false';
+  var mloader = document.getElementById('miniloader');
+  mloader.style.height = Ocean.MAZE_HEIGHT + 'px';
+  mloader.style.width = Ocean.MAZE_WIDTH + 'px';
+  mloader.style.left = visualization.offsetLeft + 'px';
+  mloader.style.top = visualization.offsetTop + 'px';
   // Ocean.left = Ocean.canvasctx.canvas.width/2 - 100;
   // alert(Ocean.left);
   Ocean.driftbackpath = 'false';
@@ -1585,7 +1503,7 @@ Ocean.resetOceanButtonClick = function(e) {
   //document.getElementById('resetButton').style.display = 'none';
   BlocklyInterface.workspace.highlightBlock(null);
   Ocean.resetOcean();
-}
+};
 /**
  * Inject the Ocean API into a JavaScript interpreter.
  * @param {!Interpreter} interpreter The JS-Interpreter.
@@ -1733,7 +1651,7 @@ Ocean.notDone1 = function() {
     return true;
   else
   return false;
-}
+};
 Ocean.execute = function() {
   if (!('Interpreter' in window)) {
     // Interpreter lazy loads and hasn't arrived yet.  Try again later.
@@ -2624,14 +2542,14 @@ Ocean.turn = function(direction, id) {
 };
 Ocean.cut = function(id) {
   Ocean.log.push(['Cut',id]);
-}
+};
 Ocean.rectangle = function(x, y, width, height, id){
   Ocean.rectX = x;
   Ocean.rectY = y;
   Ocean.rectW = width;
   Ocean.rectH = height;
   Ocean.log.push(['Rectangle', id, x, y, width, height]);
-}
+};
 Ocean.drift = function(direction, id){
   switch (direction) {
     case 1:
@@ -2641,13 +2559,13 @@ Ocean.drift = function(direction, id){
       Ocean.log.push(['LeftDrift', id]);
       break;
   }
-}
+};
 Ocean.driftback = function(id){
   Ocean.log.push(['Driftback', id]);
-}
+};
 Ocean.sail = function(id) {
   Ocean.log.push(['sailboat', id]);
-}
+};
 /**
  * Is there a path next to pegman?
  * @param {number} direction Direction to look
@@ -2718,7 +2636,7 @@ Ocean.rockInPath = function (id){
       Ocean.isRock = true;
       return true;
     }
-}
+};
 /**
  * Is the player at the finish marker?
  * @return {boolean} True if not done, false if done.
@@ -2794,7 +2712,7 @@ Ocean.checkinput = function(){
     BlocklyGames.updatecoinvalue();
     document.getElementById('dialogDoneText1').style.display = "initial";
   }
-}
+};
 Ocean.congratulationsKeyDown = function(e) {
   if (e.keyCode == 13 ||
       e.keyCode == 27 ||
@@ -2803,5 +2721,23 @@ Ocean.congratulationsKeyDown = function(e) {
     e.preventDefault();
   }
 };
+Ocean.storymessage = function (){
+  var text1 = "Congratulations on making it so far into the game!!";
+  var text2 = "phew!! you did good crossing that broken bridge and answering those tough questions I think those new concepts were very interesting for you.";
+  var text3 = "The book says that there is a bench on the beach and that it has all the items you will require to make a boat for sailing in the ocean. But book warns that sailing is not so easy and you will have to use some of your skills and that it will keep you update with the use of help tab. So let's get ready for the next adventure";
+  var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
+  document.getElementById('p1').textContent = text1;
+  document.getElementById('p2').textContent = text2;
+  document.getElementById('p3').textContent = text3;
+  document.getElementById('p4').textContent = text4;
+  document.getElementById('p2').style.top = document.getElementById('p1').offsetTop + document.getElementById('p1').offsetHeight + 'px';
+  document.getElementById('p3').style.top = document.getElementById('p2').offsetTop + document.getElementById('p2').offsetHeight + 'px';
+  function startlevel (){
+    document.getElementById('storyMessageO').style.display = 'none';
+    Ocean.init();
+  };
+  document.getElementById('cross').addEventListener("click",startlevel);
+  document.getElementById('cross').addEventListener("touchend",startlevel);
+};
 
-window.addEventListener('load', Ocean.init);
+window.addEventListener('load', Ocean.storymessage);

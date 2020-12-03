@@ -654,7 +654,11 @@ Bridge.init = function() {
   Bridge.PEGMAN_HEIGHT = 200 * BlocklyGames.factor;
   Bridge.PEGMAN_WIDTH = 200 * BlocklyGames.factor;
   Bridge.PATH_WIDTH = Bridge.SQUARE_SIZE / 3;
-
+  var mloader = document.getElementById('miniloader');
+  mloader.style.height = Bridge.MAZE_HEIGHT + 'px';
+  mloader.style.width = Bridge.MAZE_WIDTH + 'px';
+  mloader.style.left = visualization.offsetLeft + 'px';
+  mloader.style.top = visualization.offsetTop + 'px';
   // Scale the workspace so level 1 = 1.3, and level 10 = 1.0.
   // var scale = 1 + (1 - (BlocklyGames.LEVEL / BlocklyGames.MAX_LEVEL)) / 3;
   var scale = 1;
@@ -1420,7 +1424,8 @@ Bridge.resetBridgeButtonClick = function(e) {
   }
   //var runButton = document.getElementById('runButton');
   //runButton.style.display = 'inline';
-  //document.getElementById('resetButton').style.display = 'none';
+  document.getElementById('miniloader').style.display = 'initial';
+  window.miniloader();
   BlocklyInterface.workspace.highlightBlock(null);
   Bridge.resetBridge();
 }
@@ -2514,7 +2519,7 @@ Bridge.showHelp = function() {
     top: '5em'
   };
   BlocklyDialogs.showDialog(help, button, true, true, style, Bridge.hideHelp);
-  BlocklyDialogs.bridgeDialogKeyDown();
+  BlocklyDialogs.startDialogKeyDown();
 };
 
 /**
@@ -2607,4 +2612,22 @@ Bridge.congratulationsKeyDown = function(e) {
   }
 };
 
-window.addEventListener('load', Bridge.init);
+Bridge.storymessage = function (){
+  var text1 = "Congratulations on making it so far into the game!!";
+  var text2 = "You are a decent human helping others in their time of need. You helped circus people build their ring and for that they were very thankfull of you! But let's not get distracted and continue our search for treasure.";
+  var text3 = "According to the page in the book you have to cross the bridge and make it to the beach on the other side, but will this be so simple let's find out.";
+  var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
+  document.getElementById('p1').textContent = text1;
+  document.getElementById('p2').textContent = text2;
+  document.getElementById('p3').textContent = text3;
+  document.getElementById('p4').textContent = text4;
+  document.getElementById('p2').style.top = document.getElementById('p1').offsetTop + document.getElementById('p1').offsetHeight + 'px';
+  document.getElementById('p3').style.top = document.getElementById('p2').offsetTop + document.getElementById('p2').offsetHeight + 'px';
+  function startlevel (){
+    document.getElementById('storyMessageB').style.display = 'none';
+    Bridge.init();
+  };
+  document.getElementById('cross').addEventListener("click",startlevel);
+  document.getElementById('cross').addEventListener("touchend",startlevel);
+};
+window.addEventListener('load', Bridge.storymessage);

@@ -27,7 +27,6 @@ goog.require('Start.soy');
 
 
 BlocklyGames.NAME = 'start';
-
 /**
  * Go to the next level.  Add skin parameter.
  * @suppress {duplicate}
@@ -360,8 +359,8 @@ Start.drawMap = function() {
 
   var tile = Blockly.utils.dom.createSvgElement('image', {
       'id' : 'background',
-      'height': 12 * Start.SQUARE_SIZE,
-      'width': 12 * Start.SQUARE_SIZE,
+      'height': Start.MAZE_HEIGHT,
+      'width': Start.MAZE_WIDTH,
       'clip-path': 'url(#bgClipPath)'
     }, svg);
   tile.setAttributeNS(Blockly.utils.dom.XLINK_NS, 'xlink:href',
@@ -391,16 +390,16 @@ Start.drawMap = function() {
         //     'y': y * Start.SQUARE_SIZE
         //   }, tileClip);
         // Tile sprite.
-        Blockly.utils.dom.createSvgElement('rect', {
-            'height': Start.SQUARE_SIZE,
-            'width': Start.SQUARE_SIZE,
-            'fill': 'none',
-            'stroke-width': 1,
-            'stroke': '#00cc00',
-            'stroke-dasharray' : 10,
-            'x': (x-1)  * Start.SQUARE_SIZE + Start.SQUARE_SIZE/2.2,
-            'y': (y) * Start.SQUARE_SIZE - Start.SQUARE_SIZE/3.8
-          }, svg);
+        // Blockly.utils.dom.createSvgElement('rect', {
+        //     'height': Start.SQUARE_SIZE,
+        //     'width': Start.SQUARE_SIZE,
+        //     'fill': 'none',
+        //     'stroke-width': 1,
+        //     'stroke': '#00cc00',
+        //     'stroke-dasharray' : 10,
+        //     'x': (x-1)  * Start.SQUARE_SIZE + Start.SQUARE_SIZE/2.2,
+        //     'y': (y) * Start.SQUARE_SIZE - Start.SQUARE_SIZE/3.8
+        //   }, svg);
         // var tile = Blockly.utils.dom.createSvgElement('image', {
         //     'height': Start.SQUARE_SIZE,
         //     'width': Start.SQUARE_SIZE * 4,
@@ -516,7 +515,7 @@ Start.init = function() {
        maxLevel: BlocklyGames.MAX_LEVEL,
        skin: Start.SKIN_ID,
        html: BlocklyGames.IS_HTML});
-
+// Start.storymessage();
   BlocklyInterface.init();
   document.getElementById('finishanimation').style.display = 'none';
   // Setup the Pegman menu.
@@ -682,16 +681,16 @@ Start.init = function() {
     // All other levels get interactive help.  But wait 5 seconds for the
     // user to think a bit before they are told what to do.
   }
-
-  // Add the spinning Pegman icon to the done dialog.
-  // <img id="pegSpin" src="common/1x1.gif">
-  // var buttonDiv = document.getElementById('dialogDoneButtons');
-  // var pegSpin = document.createElement('img');
-  // pegSpin.id = 'pegSpin';
-  // pegSpin.src = 'common/1x1.gif';
-  // pegSpin.style.backgroundImage = 'url(' + Start.SKIN.sprite + ')';
-  // buttonDiv.parentNode.insertBefore(pegSpin, buttonDiv);
-
+  var mloader = document.getElementById('miniloader');
+  mloader.style.height = Start.MAZE_HEIGHT + 'px';
+  mloader.style.width = Start.MAZE_WIDTH + 'px';
+  mloader.style.left = visualization.offsetLeft + 'px';
+  mloader.style.top = visualization.offsetTop + 'px';
+  // mloader.style.display = 'none';
+  // setTimeout(function(){
+  //   document.getElementById('miniloader').style.display = 'block';
+  //   window.miniloader();
+  // },5000);
   // Lazy-load the JavaScript interpreter.
   BlocklyInterface.importInterpreter();
   // Lazy-load the syntax-highlighting.
@@ -1062,11 +1061,6 @@ Start.reset = function(first) {
       startIcon.getAttribute('width') / 2);
   startIcon.setAttribute('y', Start.SQUARE_SIZE * (Start.start_.y + 0.6) -
       startIcon.getAttribute('height') / 2);
-  var bg = document.getElementById('background');
-  bg.setAttribute('x', Start.SQUARE_SIZE * (0) -
-      bg.getAttribute('width') / 2);
-  bg.setAttribute('y', Start.SQUARE_SIZE * (0) -
-      bg.getAttribute('height') / 2);
 
   // Make 'look' icon invisible and promote to top.
   var lookIcon = document.getElementById('look');
@@ -1848,7 +1842,7 @@ Start.schedule = function(startPos, endPos) {
     // Start.pathlength += Math.sqrt((endPos[0] - startPos[0]) * (endPos[0] - startPos[0]) + (endPos[1] - startPos[1]) * (endPos[1] - startPos[1]));
     if(Math.abs(endPos[0] - startPos[0]) > 0 && Math.abs(endPos[1] - startPos[1]))
       Start.pathlength += 1.4;
-    else {
+    else if(Math.abs(endPos[0] - startPos[0]) > 0 || Math.abs(endPos[1] - startPos[1])){
       Start.pathlength += 1;
     }
     // Start.pathlength += Math.max(Math.abs(endPos[0] - startPos[0]), Math.abs(endPos[1] - startPos[1]));
@@ -2580,5 +2574,22 @@ Start.congratulationsKeyDown = function(e) {
     }
   }
 };
-
-window.addEventListener('load', Start.init);
+Start.storymessage = function (){
+  var text1 = "Welcome to the Beginning of this treasure hunt game!!";
+  var text2 = "Before the start of each level you will see the set of instructions written down in the old book \"Treasure Hunt\". Follow the instructions carefully to find the treasure box.";
+  var text3 = "In the first level you are outside your house to go in search of treasure box. The first instruction is to collect all the coins you find in the ground and go to the circus.";
+  var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
+  document.getElementById('p1').textContent = text1;
+  document.getElementById('p2').textContent = text2;
+  document.getElementById('p3').textContent = text3;
+  document.getElementById('p4').textContent = text4;
+  document.getElementById('p2').style.top = document.getElementById('p1').offsetTop + document.getElementById('p1').offsetHeight + 'px';
+  document.getElementById('p3').style.top = document.getElementById('p2').offsetTop + document.getElementById('p2').offsetHeight + 'px';
+  function startlevel (){
+    Start.init();
+    document.getElementById('storyMessage').style.display = 'none';
+  };
+  document.getElementById('cross').addEventListener("click",startlevel);
+  document.getElementById('cross').addEventListener("touchend",startlevel);
+};
+window.addEventListener('load', Start.storymessage);

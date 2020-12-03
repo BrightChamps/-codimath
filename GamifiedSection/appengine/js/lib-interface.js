@@ -11,7 +11,6 @@
 'use strict';
 
 goog.provide('BlocklyInterface');
-
 goog.require('Blockly');
 goog.require('Blockly.geras.Renderer');
 goog.require('BlocklyGames');
@@ -54,6 +53,7 @@ BlocklyInterface.executedJsCode = '';
  * Common startup tasks for all apps.
  */
 BlocklyInterface.init = function() {
+  BlocklyInterface.fullScreenLoader();
   BlocklyGames.init();
   BlocklyInterface.currentpage;
   // Disable the link button if page isn't backed by App Engine storage.
@@ -199,6 +199,14 @@ BlocklyInterface.getCode = function() {
   return text;
 };
 
+BlocklyInterface.fullScreenLoader = function() {
+  var script1 = document.createElement('script');
+  script1.src= './progressbar.js-master/dist/progressbar.js';
+  script1.type = 'text/javascript';
+  document.head.appendChild(script1);
+  window.loadscreen();
+  // window.miniloader();
+}
 /**
  * Get the user's executable code as JS from the editor (Blockly or ACE).
  * @return {string} JS code.

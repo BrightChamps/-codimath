@@ -1195,5 +1195,24 @@ Circus.checkAnswers = function() {
   }
 };
 
+Circus.storymessage = function (){
+  var text1 = "Congratulations on making it to the circus!!";
+  var text2 = "Hope you enjoyed the first level and learned a few concepts. Now That you have earned a few coin let's spend them to watch few rides.";
+  var text3 = "Book says that you have to cross the circus and make it to the next side of the circus(opposite end) and that the only way to do that is to go through the circus. But will it be that easy? Let's go into the circus and see what unfolds"
+              + ". Ohh the riders ring is broken but the supports it was held with are still there. let's help him build another one.";
+  var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
+  document.getElementById('p1').textContent = text1;
+  document.getElementById('p2').textContent = text2;
+  document.getElementById('p3').textContent = text3;
+  document.getElementById('p4').textContent = text4;
+  document.getElementById('p2').style.top = document.getElementById('p1').offsetTop + document.getElementById('p1').offsetHeight + 'px';
+  document.getElementById('p3').style.top = document.getElementById('p2').offsetTop + document.getElementById('p2').offsetHeight + 'px';
+  function startlevel (){
+    document.getElementById('storyMessageC').style.display = 'none';
+    Circus.init();
+  };
+  document.getElementById('cross').addEventListener("click",startlevel);
+  document.getElementById('cross').addEventListener("touchend",startlevel);
+};
 
-window.addEventListener('load', Circus.init);
+window.addEventListener('load', Circus.storymessage);
