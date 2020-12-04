@@ -140,7 +140,12 @@ Circus.init = function() {
   document.getElementById('axies').style.height = Circus.HEIGHT + 'px';
   document.getElementById('hatching').style.width = Circus.WIDTH + 'px';
   document.getElementById('hatching').style.height = Circus.HEIGHT + 'px';
-
+  var img = new Image;
+  img.src = 'circus/Untitled.png';
+  setTimeout(function(){
+    Circus.ctxDisplay.drawImage(img,0,0);
+    Circus.display();
+  },4000);
   // Circus.renderHatching_();
   // Render the frame zero answer because we need it right now.
   Circus.renderAnswer_(0);
@@ -158,7 +163,6 @@ Circus.init = function() {
   Circus.renderSuppourts_();
   Circus.rideranimationvalue = true;
   Circus.riderrotation = true;
-  setTimeout(Circus.display,3000);
   // Preload the win sound.
   // BlocklyInterface.workspace.getAudioManager().load(
   //     ['movie/win.mp3', 'movie/win.ogg'], 'win');
