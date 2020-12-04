@@ -73,12 +73,14 @@ Circus.init = function() {
    var ctx4 = document.getElementById('support4').getContext('2d');
    var ctx5 = document.getElementById('support5').getContext('2d');
    var image = new Image();
-   image.src = 'circus/GlowRedFinal.png';
-   ctx1.drawImage(image, 0, 0, 40, 40, 0, 0, ctx1.canvas.width , ctx1.canvas.height );
-   ctx2.drawImage(image, 0, 0, 40, 40, 0, 0, ctx2.canvas.width , ctx2.canvas.height );
-   ctx3.drawImage(image, 0, 0, 40, 40, 0, 0, ctx3.canvas.width , ctx3.canvas.height );
-   ctx4.drawImage(image, 0, 0, 40, 40, 0, 0, ctx4.canvas.width , ctx4.canvas.height );
-   ctx5.drawImage(image, 0, 0, 40, 40, 0, 0, ctx5.canvas.width , ctx5.canvas.height );
+   image.src = 'circus/GlowBlack.png';
+   setTimeout(function(){
+     ctx1.drawImage(image, 16 * 40, 0, 40, 40, 0, 0, ctx1.canvas.width , ctx1.canvas.height );
+     ctx2.drawImage(image, 16 * 40, 0, 40, 40, 0, 0, ctx2.canvas.width , ctx2.canvas.height );
+     ctx3.drawImage(image, 16 * 40, 0, 40, 40, 0, 0, ctx3.canvas.width , ctx3.canvas.height );
+     ctx4.drawImage(image, 16 * 40, 0, 40, 40, 0, 0, ctx4.canvas.width , ctx4.canvas.height );
+     ctx5.drawImage(image, 16 * 40, 0, 40, 40, 0, 0, ctx5.canvas.width , ctx5.canvas.height );
+   },3000);
   BlocklyInterface.init();
   var rtl = BlocklyGames.isRtl();
   var blocklyDiv = document.getElementById('blockly');
@@ -156,7 +158,7 @@ Circus.init = function() {
   Circus.renderSuppourts_();
   Circus.rideranimationvalue = true;
   Circus.riderrotation = true;
-
+  setTimeout(Circus.display,3000);
   // Preload the win sound.
   // BlocklyInterface.workspace.getAudioManager().load(
   //     ['movie/win.mp3', 'movie/win.ogg'], 'win');
@@ -382,7 +384,7 @@ Circus.renderAnswer_ = function(f) {
      ctx3.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx3.canvas.width , ctx3.canvas.height );
      ctx4.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx4.canvas.width , ctx4.canvas.height );
      ctx5.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx5.canvas.width , ctx5.canvas.height );
-   },200);
+   },400);
  }
  /**
   * When called start support animation
@@ -1017,7 +1019,7 @@ Circus.display = function(opt_frameNumber) {
     if (BlocklyGames.LEVEL == 1) {
       setTimeout(Circus.checkAnswers, 1000);
     }
-  },300);
+  },200);
   Circus.renderSuppourts_();
 };
 
