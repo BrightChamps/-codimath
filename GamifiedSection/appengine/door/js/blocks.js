@@ -145,11 +145,11 @@ Blockly.Blocks['door_rotate'] = {
           "options": [
             [
               "Right",
-              "right"
+              "rightRotateBlock"
             ],
             [
               "Left",
-              "left"
+              "leftRotateBlock"
             ]
           ]
         },
@@ -173,5 +173,5 @@ Blockly.JavaScript['door_rotate'] = function(block) {
   var direction = block.getFieldValue('direction');
   var angle = block.getFieldValue('angle');
   // TODO: Assemble JavaScript into code variable.
-  return 'rotateblock(' + x + ', ' + y + ', ' + direction + ', ' + angle + ', \'block_id_' + block.id + '\');\n';
+  return direction + '(' + x + ', ' + y + ', ' + angle + ', \'block_id_' + block.id + '\');\n';
 };

@@ -53,7 +53,10 @@ html[dir="RTL"] #pegSpin {
   padding: 0 1ex;
   cursor: default;
 }
-
+.elementclass{
+  position: absolute;
+  /* border: 1px solid black; */
+}
 
 .modall {
   display: none; /* Hidden by default */
@@ -112,8 +115,9 @@ img[src$="help_down.png"] {
   width: 23px;
 }
 
-#svgMaze {
+#svgDoor {
   overflow: hidden;
+  /* display: none; */
 }
 
 /* 'Look' icon */

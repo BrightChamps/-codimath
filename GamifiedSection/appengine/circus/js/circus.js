@@ -171,7 +171,7 @@ Circus.init = function() {
   //                                        BlocklyGames.LEVEL)) {
   //   // setTimeout(Circus.showHelp, 1000);
   // }
-
+  setTimeout(Circus.showHelp,4000);
   visualization.addEventListener('mouseover', Circus.showCoordinates);
   visualization.addEventListener('mouseout', Circus.hideCoordinates);
   visualization.addEventListener('mousemove', Circus.updateCoordinates);
@@ -375,17 +375,19 @@ Circus.renderAnswer_ = function(f) {
    document.getElementById('support5').style.height =45.36  * BlocklyGames.factor + 'px';
 
    var image = new Image();
-   image.src = 'circus/GlowRedFinal.png';
-   ctx1.drawImage(image, 0, 0, 40, 40, 0, 0, ctx1.canvas.width , ctx1.canvas.height );
-   ctx2.drawImage(image, 0, 0, 40, 40, 0, 0, ctx2.canvas.width , ctx2.canvas.height );
-   ctx3.drawImage(image, 0, 0, 40, 40, 0, 0, ctx3.canvas.width , ctx3.canvas.height );
-   ctx4.drawImage(image, 0, 0, 40, 40, 0, 0, ctx4.canvas.width , ctx4.canvas.height );
-   ctx5.drawImage(image, 0, 0, 40, 40, 0, 0, ctx5.canvas.width , ctx5.canvas.height );
+   image.src = 'circus/GlowBlack.png';
+   setTimeout(function(){
+     ctx1.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx1.canvas.width , ctx1.canvas.height );
+     ctx2.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx2.canvas.width , ctx2.canvas.height );
+     ctx3.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx3.canvas.width , ctx3.canvas.height );
+     ctx4.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx4.canvas.width , ctx4.canvas.height );
+     ctx5.drawImage(image, 16*40, 0, 40, 40, 0, 0, ctx5.canvas.width , ctx5.canvas.height );
+   },200);
  }
  /**
   * When called start support animation
   */
-  Circus.sheetwidth = 2560;
+  Circus.sheetwidth = 1280;
   Circus.sheetheight = 40;
   Circus.stop = false;
   Circus.supportanimation_ = function(number)
@@ -393,13 +395,11 @@ Circus.renderAnswer_ = function(f) {
     var canvas = document.getElementById('support' + number);
     var ctx = canvas.getContext('2d');
     var img = new Image();
-    img.src = 'circus/GlowRedFinal.png';
-    var image = new Image();
-    image.src = 'circus/square_1.png';
+    img.src = 'circus/GlowBlack.png';
     var srcX = 0;
     var srcY = 0;
-    var framecount = 64;
-    var currentFrame = 0;
+    var framecount = 32;
+    var currentFrame = 16;
     var width = Circus.sheetwidth / framecount;
     var count = 0;
     var flag = 0;
@@ -626,8 +626,8 @@ Circus.renderAnswer_ = function(f) {
 Circus.renderAxies_ = function() {
   var ctx = document.getElementById('axies').getContext('2d');
   ctx.lineWidth = 1;
-  ctx.strokeStyle = '#bba';
-  ctx.fillStyle = '#bba';
+  ctx.strokeStyle = 'black';
+  ctx.fillStyle = 'black';
   ctx.font = 'normal 14px sans-serif';
   var TICK_LENGTH = 9;
   var major = 1;
@@ -744,8 +744,25 @@ Circus.drawFrame_ = function(interpreter) {
   Circus.rotaterider = function(){
     var rider = document.getElementById('rider');
     rider.style.transformOrigin = "50% 0";
+    var img = new Image();
+    img.src = "circus/circus-side-view1.png";
+    var srcX;
+    var srcY;
+    var currentFrame = 0;
+    var frameCount = 2;
+    var count = 0;
     function timerCode(){
       if(Circus.riderrotation){
+        if(count++% 2 == 0)
+          currentFrame = ++currentFrame % frameCount;
+        srcX = currentFrame * 1200;
+        srcY = 0;
+        Circus.ctxDisplay.rect(0, 0,
+            Circus.ctxDisplay.canvas.width, Circus.ctxDisplay.canvas.height);
+        Circus.ctxDisplay.fillStyle = '#ffffff';
+        Circus.ctxDisplay.fill();
+        Circus.ctxDisplay.drawImage(img, srcX, srcY, 1200, 1000, 0 , 0, Circus.ctxDisplay.canvas.width, Circus.ctxDisplay.canvas.height);
+        Circus.ctxDisplay.drawImage(Circus.ctxScratch.canvas,0,0);
         Circus.anglerotated += Circus.anglerotation;
         rider.style.transform = "rotate(-"+Circus.anglerotated+"deg)";
         if(Circus.anglerotated == 360)
@@ -954,11 +971,6 @@ Circus.display = function(opt_frameNumber) {
   var frameNumber = Circus.frameNumber;
 
   // Clear the display with white.
-  Circus.ctxDisplay.beginPath();
-  Circus.ctxDisplay.rect(0, 0,
-      Circus.ctxDisplay.canvas.width, Circus.ctxDisplay.canvas.height);
-  Circus.ctxDisplay.fillStyle = '#ffffff';
-  Circus.ctxDisplay.fill();
 
   // Copy the answer.
   // var answer = document.getElementById('answer' + frameNumber);
@@ -986,16 +998,26 @@ Circus.display = function(opt_frameNumber) {
     // In the event of a syntax error, clear the canvas.
     Circus.ctxScratch.canvas.width = Circus.ctxScratch.canvas.width;
   }
-  Circus.ctxDisplay.drawImage(Circus.ctxScratch.canvas, 0, 0);
 
   // Copy the axies.
-  Circus.ctxDisplay.drawImage(document.getElementById('axies'), 0, 0);
-  Circus.namingSupports();
+  var img = new Image();
+  img.src = 'circus/Untitled.png';
+  setTimeout(function(){
+    Circus.ctxDisplay.beginPath();
+    Circus.ctxDisplay.rect(0, 0,
+        Circus.ctxDisplay.canvas.width, Circus.ctxDisplay.canvas.height);
+    Circus.ctxDisplay.fillStyle = '#ffffff';
+    Circus.ctxDisplay.fill();
+    Circus.ctxDisplay.drawImage(img,0,0);
+    Circus.ctxDisplay.drawImage(Circus.ctxScratch.canvas, 0, 0);
+    Circus.ctxDisplay.drawImage(document.getElementById('axies'), 0, 0);
+    Circus.namingSupports();
 
-  Circus.checkFrameAnswer();
-  if (BlocklyGames.LEVEL == 1) {
-    setTimeout(Circus.checkAnswers, 1000);
-  }
+    Circus.checkFrameAnswer();
+    if (BlocklyGames.LEVEL == 1) {
+      setTimeout(Circus.checkAnswers, 1000);
+    }
+  },300);
   Circus.renderSuppourts_();
 };
 
@@ -1198,8 +1220,7 @@ Circus.checkAnswers = function() {
 Circus.storymessage = function (){
   var text1 = "Congratulations on making it to the circus!!";
   var text2 = "Hope you enjoyed the first level and learned a few concepts. Now That you have earned a few coin let's spend them to watch few rides.";
-  var text3 = "Book says that you have to cross the circus and make it to the next side of the circus(opposite end) and that the only way to do that is to go through the circus. But will it be that easy? Let's go into the circus and see what unfolds"
-              + ". Ohh the riders ring is broken but the supports it was held with are still there. let's help him build another one.";
+  var text3 = "Book says that you have to cross the circus and make it to the next side of the circus(opposite end) and that the only way to do that is to go through the circus. But will it be that easy? Let's go into the circus and see what unfolds";
   var text4 = "(Quick tip : Use help commands whenever you are stuck on what to do!!)";
   document.getElementById('p1').textContent = text1;
   document.getElementById('p2').textContent = text2;

@@ -153,14 +153,20 @@
   {/if}
 
   <div id="help" class="dialogHiddenContent">
-    <div style="padding-bottom: 0.7ex">
+    <div style="padding-bottom: 0.7ex" style="font-size:150%;">
       {if $ij.level == 1}
         {msg meaning="Circus.helpText1" desc="Instructions."}
-          Use Line and perpendicular line blocks to :
+          Unfortunately the ring used by rider is broken and you have to help him build it with the help of these supports : A, B, C, D and E.
+          <br>
           <br>
           Find the circumcentre of the triangle formed with various combinations of supports named A, B, C, D, E use the inner points of every support example : Bottom left corner of support B
           <br>
-          Important : Once you have calculated the circumcentre and radius of Circum Circle, remove all the blocks and draw a circle corresponding to radius and centre found with width = 2.
+          <br>
+          <br>
+          Important : Once you have calculated the circumcentre and radius of Circum Circle, clear the workspace by deleting all blocks and draw a circle corresponding to radius and centre found with width = 2.
+          <br>
+          <br>
+          (Quick Tip: Use coordinate of inner points of supports to draw the triangle and with the help of various blocks provided drawing ring will be easy task!!)
         {/msg}
       {elseif $ij.level == 2}
         {msg meaning="Circus.helpText2a" desc="Instructions.  The play button looks like the video play button on YouTube."}

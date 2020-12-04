@@ -387,43 +387,96 @@ Door.drawMap = function() {
   //
   // // Compute and draw the tile for each square.
   // var tileId = 0;
+  var img = new Image();
+  img.src= 'door/puzzle-without-label.png';
   for (var y = 0; y < Door.ROWS; y++) {
     for (var x = 0; x < Door.COLS ; x++) {
-      var tileShape = (x).toString() + ',' + (y).toString();
-      var left = Door.tile_SHAPES[tileShape][0];
-      var top = Door.tile_SHAPES[tileShape][1];
-      // Tile's clipPath element.
-      var tileClip = Blockly.utils.dom.createSvgElement('clipPath', {
-          'id': 'tileClipPath' + (x+1).toString() + (y+1).toString()
-        }, svg);
-      Blockly.utils.dom.createSvgElement('rect', {
-          'height': Door.SQUARE_SIZE,
-          'width': Door.SQUARE_SIZE,
-          'x': x * Door.SQUARE_SIZE,
-          'y': y * Door.SQUARE_SIZE
-        }, tileClip);
-      // Tile sprite.
-      var tile = Blockly.utils.dom.createSvgElement('image', {
-          'id' : (x+1).toString() + (y+1).toString(),
-          'height': Door.SQUARE_SIZE * 5,
-          'width': Door.SQUARE_SIZE * 6,
-          'clip-path': 'url(#tileClipPath' + (x+1).toString() + (y+1).toString() + ')',
-          'x': (x - left) * Door.SQUARE_SIZE,
-          'y': (y - top) * Door.SQUARE_SIZE
-        }, svg);
-      tile.setAttributeNS(Blockly.utils.dom.XLINK_NS, 'xlink:href',
-          Door.SKIN.tiles);
-      var te = Blockly.utils.dom.createSvgElement('text', {
-        'x' : x * Door.SQUARE_SIZE,
-        'y': y * Door.SQUARE_SIZE,
-        
-      })
+      // var tileShape = (x).toString() + ',' + (y).toString();
+      // var left = Door.tile_SHAPES[tileShape][0];
+      // var top = Door.tile_SHAPES[tileShape][1];
+      // // Tile's clipPath element.
+      // var tileClip = Blockly.utils.dom.createSvgElement('clipPath', {
+      //     'id': 'tileClipPath' + (x+1).toString() + (y+1).toString()
+      //   }, svg);
+      // Blockly.utils.dom.createSvgElement('rect', {
+      //     'height': Door.SQUARE_SIZE,
+      //     'width': Door.SQUARE_SIZE,
+      //     'x': x * Door.SQUARE_SIZE,
+      //     'y': y * Door.SQUARE_SIZE
+      //   }, tileClip);
+      // // Tile sprite.
+      // var tile = Blockly.utils.dom.createSvgElement('image', {
+      //     'id' : (x+1).toString() + (y+1).toString(),
+      //     'height': Door.SQUARE_SIZE * 5,
+      //     'width': Door.SQUARE_SIZE * 6,
+      //     'clip-path': 'url(#tileClipPath' + (x+1).toString() + (y+1).toString() + ')',
+      //     'x': (x - left) * Door.SQUARE_SIZE,
+      //     'y': (y - top) * Door.SQUARE_SIZE
+      //   }, svg);
+      // tile.setAttributeNS(Blockly.utils.dom.XLINK_NS, 'xlink:href',
+      //     Door.SKIN.tiles);
+      // var te = Blockly.utils.dom.createSvgElement('text', {
+      //   'x' : x * Door.SQUARE_SIZE,
+      //   'y': y * Door.SQUARE_SIZE,
+      // })
+      var visualization = document.getElementById("visualization");
+      var div = document.createElement("div");
+      div.id= (x+1).toString() + (y+1).toString();
+      div.style.top = y * Door.SQUARE_SIZE  + 'px';
+      div.style.left = x * Door.SQUARE_SIZE + 'px';
+      div.style.width = Door.SQUARE_SIZE + 'px';
+      div.style.height = Door.SQUARE_SIZE + 'px';
+      div.className = "elementclass";
+      var canvas = document.createElement("canvas");
+      canvas.id = "Canvas" + (x+1).toString() + (y+1).toString();
+      canvas.style.width =  Door.SQUARE_SIZE + 'px';
+      canvas.style.height =  Door.SQUARE_SIZE + 'px';
+      div.appendChild(canvas);
+      visualization.appendChild(div);
     }
   }
+  setTimeout(function(){
+    for (var y = 0; y < Door.ROWS; y++) {
+      for (var x = 0; x < Door.COLS ; x++) {
+        var canvas = document.getElementById("Canvas" + (x+1).toString() + (y+1).toString());
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img,x*200, y* 200, 200,200, 0, 0, canvas.width, canvas.height);
+      }
+    }
+    // Door.randomGenerate();
+  },2000);
 
   // Add finish marker.
 };
 
+//  Door.randomGenerate = function() {
+//   var done = new Set();
+//   function generator(){
+//     var no1 = Math.floor((Math.random() * 30) + 1);
+//     if(done.has(no1))
+//     {
+//       var no2 = generator();
+//       no1 = no2;
+//     }
+//     else{
+//       done.add(no1);
+//       return no1;
+//     }
+//   }
+//   for(var i=1;i<=34;i++){
+//     var no = generator();
+//     var x = (Math.floor(i % 7)).toString();
+//     if(x == '0')
+//     {
+//       x = '1';
+//       i++;
+//     }
+//     console.log(x + (Math.floor(i / 7) + 1).toString());
+//     console.log(no);
+//     // document.getElementById((Math.floor(i % 6) + 1).toString() + (Math.floor(i / 6) + 1).toString()).style.top = (Math.floor(no / 6)) * Door.SQUARE_SIZE + 'px';
+//     // document.getElementById((Math.floor(i % 6) + 1).toString() + (Math.floor(i / 6) + 1).toString()).style.left = (Math.floor(no % 7)) * Door.SQUARE_SIZE + 'px';
+//   }
+// }
 /**
  * Initialize Blockly and the door.  Called on page load.
  */
@@ -959,10 +1012,15 @@ Door.initInterpreter = function(interpreter, globalObject) {
   };
   interpreter.setProperty(globalObject, 'moveblock',
       interpreter.createNativeFunction(wrapper));
-  wrapper = function(x, y, direction, angle, id) {
-    Door.rotateBlockf(x, y, direction, angle, id);
+  wrapper = function(x, y, angle, id) {
+    Door.rotateBlockf(x, y, 1, angle, id);
   };
-  interpreter.setProperty(globalObject, 'rotateblock',
+  interpreter.setProperty(globalObject, 'rightRotateBlock',
+      interpreter.createNativeFunction(wrapper));
+  wrapper = function(x, y, angle, id) {
+    Door.rotateBlockf(x, y, 0, angle, id);
+  };
+  interpreter.setProperty(globalObject, 'leftRotateBlock',
       interpreter.createNativeFunction(wrapper));
 
 };
@@ -1045,22 +1103,25 @@ Door.animate = function() {
       case 'move':
         var block1 = document.getElementById(action[2].toString() + action[3].toString());
         var block2 = document.getElementById(action[4].toString() + action[5].toString());
-        var dummyX = block1.getAttribute('x');
-        var dummY = block1.getAttribute('y');
-        alert(action[2].toString() + action[3].toString());
-        alert(block2.getAttribute('x'));
-        block1.setAttribute('x', block2.getAttribute('x'));
-        block1.setAttribute('y', block2.getAttribute('y'));
-        block2.setAttribute('x', dummyX);
-        block2.setAttribute('y', dummY);
-        document.getElementById('tileClipPath' + action[2].toString() + action[3].toString()).setAttribute('x', block1.getAttribute('x'));
-        document.getElementById('tileClipPath' + action[2].toString() + action[3].toString()).setAttribute('y', block1.getAttribute('y'));
-        document.getElementById('tileClipPath' + action[4].toString() + action[5].toString()).setAttribute('x', block2.getAttribute('x'));
-        document.getElementById('tileClipPath' + action[4].toString() + action[5].toString()).setAttribute('y', block2.getAttribute('y'));
+        var dummyX = block1.offsetLeft;
+        var dummyY = block1.offsetTop;
+        block1.style.left = block2.offsetLeft + 'px';
+        block1.style.top = block2.offsetTop + 'px';
+        block2.style.left = dummyX + 'px';
+        block2.style.top = dummyY + 'px';
+        Door.timevalue = 2;
         break;
       case 'leftRotate':
+        var block1 = document.getElementById(action[2].toString() + action[3].toString());
+        block1.style.transformOrigin = "50% 50%";
+        block1.style.transform = "rotate(-" + action[4] + "deg)";
+        Door.timevalue = 3;
         break;
       case 'rightRotate':
+        var block1 = document.getElementById(action[2].toString() + action[3].toString());
+        block1.style.transformOrigin = "50% 50%";
+        block1.style.transform = "rotate(" + action[4] + "deg)";
+        Door.timevalue = 3;
         break;
       case 'finish':
         Door.scheduleFinish(true);
@@ -1558,7 +1619,7 @@ Door.moveBlockf = function(x1, y1, x2, y2, id) {
 Door.rotateBlockf = function(x, y, direction, angle, id) {
   if(!Door.prevlog.has(id)){
     var command;
-    if(direction == 'right')
+    if(direction == 1)
     {
       command = 'rightRotate';
     }
